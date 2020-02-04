@@ -1,0 +1,14 @@
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe.config
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\SistemaColegioEF.pdb
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\EntityFramework.dll
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\EntityFramework.xml
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.csprojResolveAssemblyReference.cache
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmHome.resources
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.frmLogin.resources
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Properties.Resources.resources
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.GenerateResource.Cache
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.exe
+c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
