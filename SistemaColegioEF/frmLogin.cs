@@ -40,6 +40,8 @@ namespace SistemaColegioEF
                     var oUser = result.First();
                     frmHome oFrmHome = new frmHome(oUser.Id, oUser.User, oUser.Pass, oUser.Permiso);
                     oFrmHome.Show();
+                    tbUsuario.Clear();
+                    tbContraseña.Clear();
                 }
                 else
                 {
@@ -55,7 +57,6 @@ namespace SistemaColegioEF
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
-            this.Close();
 
         }
     }

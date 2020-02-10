@@ -12,32 +12,72 @@ namespace SistemaColegioEF.Formularios
 {
     public partial class frmHome : Form
     {
-        string idUser, oPermiso;
+        string idUser;
+        bool logueado;
         public frmHome(int id, string usuario, string pass, string permiso)
         {
             InitializeComponent();
             idUser = id.ToString();
             lblUsuario.Text = usuario;
-            oPermiso = permiso;
+            lblPermiso.Text = permiso;
+            logueado = true;
+            _ = permiso == "total" ? btnSistema.Enabled = true : btnSistema.Enabled = false;
+
         }
 
+        //CIERRE_DE_SESION
         private void button1_Click(object sender, EventArgs e)
         {
+            logueado = false;
             this.Close();
         }
 
         private void frmHome_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;
-            if (oPermiso == "parcial")
+        }
+
+        private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!logueado)
             {
-                btnSistema.Visible = false;
+                DialogResult dgLogout = MessageBox.Show(this, "¿Está seguro que quiere cerrar la sesión?", "Logout",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (dgLogout == DialogResult.Yes)
+                {
+                    return;
+                }
+                if (dgLogout == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            else
+            {
+                DialogResult dgExit = MessageBox.Show(this, "Saliendo del programa, ¿Está seguro?", "¡ATENCIÓN!",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (dgExit == DialogResult.Yes)
+                {
+                    Environment.Exit(1);
+                }
+                if (dgExit == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblHoraActual.Text = DateTime.Now.ToString("HH:mm:ss tt");
+        }
+
+        private void btnSistema_Click(object sender, EventArgs e)
+        {
+            frmSistema oFrmSistema = new frmSistema();
+            oFrmSistema.ShowDialog();
         }
     }
 }

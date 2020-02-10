@@ -12,3 +12,19 @@ c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\Sistema
 c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.GenerateResource.Cache
 c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.exe
 c:\users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe.config
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.pdb
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.dll
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.xml
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csprojAssemblyReference.cache
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmHome.resources
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.frmLogin.resources
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Properties.Resources.resources
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.GenerateResource.cache
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.CopyComplete
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.exe
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
+C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources

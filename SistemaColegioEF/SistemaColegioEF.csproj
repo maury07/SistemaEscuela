@@ -63,6 +63,12 @@
     <Compile Include="Formularios\frmHome.Designer.cs">
       <DependentUpon>frmHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmSistema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmSistema.Designer.cs">
+      <DependentUpon>frmSistema.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Alumno.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
@@ -125,6 +131,9 @@
     <EmbeddedResource Include="Formularios\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmSistema.resx">
+      <DependentUpon>frmSistema.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +179,8 @@
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
       <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\equipo.png" />
+    <None Include="Resources\celeste.jpg" />
     <None Include="Resources\violeta.jpg" />
     <None Include="Resources\us.png" />
     <None Include="Resources\key.png" />

@@ -89,6 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::SistemaColegioEF.Properties.Resources.violeta;
             this.ClientSize = new System.Drawing.Size(300, 250);
             this.Controls.Add(this.pictureBox2);
@@ -99,8 +100,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -109,12 +110,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbUsuario;
         private System.Windows.Forms.Button btnIngresar;
-        private System.Windows.Forms.TextBox tbContraseña;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TextBox tbUsuario;
+        private System.Windows.Forms.TextBox tbContraseña;
     }
 }
 

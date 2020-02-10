@@ -33,9 +33,9 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblPermiso = new System.Windows.Forms.Label();
             this.scContenedorHome = new System.Windows.Forms.SplitContainer();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.lblHoraActual = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.lblTituloUsuario = new System.Windows.Forms.Label();
             this.btnInfo = new System.Windows.Forms.Button();
             this.btnAsistencias = new System.Windows.Forms.Button();
             this.btnMaterias = new System.Windows.Forms.Button();
@@ -43,7 +43,7 @@
             this.btnProfesores = new System.Windows.Forms.Button();
             this.btnEstudiantes = new System.Windows.Forms.Button();
             this.btnSistema = new System.Windows.Forms.Button();
-            this.lblTituloUsuario = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.scContenedorHome)).BeginInit();
             this.scContenedorHome.Panel1.SuspendLayout();
             this.scContenedorHome.Panel2.SuspendLayout();
@@ -114,13 +114,6 @@
             this.scContenedorHome.TabIndex = 5;
             this.scContenedorHome.TabStop = false;
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.monthCalendar1.Location = new System.Drawing.Point(9, 219);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 5;
-            // 
             // lblHoraActual
             // 
             this.lblHoraActual.AutoSize = true;
@@ -132,9 +125,23 @@
             this.lblHoraActual.TabIndex = 5;
             this.lblHoraActual.Text = "Hora actual";
             // 
-            // timer1
+            // monthCalendar1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.monthCalendar1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.monthCalendar1.Location = new System.Drawing.Point(9, 219);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 5;
+            // 
+            // lblTituloUsuario
+            // 
+            this.lblTituloUsuario.AutoSize = true;
+            this.lblTituloUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTituloUsuario.Location = new System.Drawing.Point(23, 14);
+            this.lblTituloUsuario.Name = "lblTituloUsuario";
+            this.lblTituloUsuario.Size = new System.Drawing.Size(69, 17);
+            this.lblTituloUsuario.TabIndex = 12;
+            this.lblTituloUsuario.Text = "Usuario:";
             // 
             // btnInfo
             // 
@@ -223,17 +230,11 @@
             this.btnSistema.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSistema.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSistema.UseVisualStyleBackColor = true;
+            this.btnSistema.Click += new System.EventHandler(this.btnSistema_Click);
             // 
-            // lblTituloUsuario
+            // timer1
             // 
-            this.lblTituloUsuario.AutoSize = true;
-            this.lblTituloUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblTituloUsuario.Location = new System.Drawing.Point(23, 14);
-            this.lblTituloUsuario.Name = "lblTituloUsuario";
-            this.lblTituloUsuario.Size = new System.Drawing.Size(69, 17);
-            this.lblTituloUsuario.TabIndex = 12;
-            this.lblTituloUsuario.Text = "Usuario:";
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmHome
             // 
@@ -249,6 +250,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sistema Escolar";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHome_FormClosing);
             this.Load += new System.EventHandler(this.frmHome_Load);
             this.scContenedorHome.Panel1.ResumeLayout(false);
             this.scContenedorHome.Panel1.PerformLayout();
