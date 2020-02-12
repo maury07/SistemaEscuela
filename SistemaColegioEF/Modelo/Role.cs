@@ -14,10 +14,16 @@ namespace SistemaColegioEF.Modelo
     
     public partial class Role
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            this.Usuarios = new HashSet<Usuario>();
+        }
+    
         public int idRoles { get; set; }
         public string permiso { get; set; }
-        public Nullable<int> idUsuario { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

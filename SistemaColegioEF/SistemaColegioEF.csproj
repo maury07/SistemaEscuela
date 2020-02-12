@@ -34,12 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -70,10 +68,19 @@
     <Compile Include="Formularios\frmSistema.Designer.cs">
       <DependentUpon>frmSistema.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Alumno.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\AlumnoAsistencia.cs">
+      <DependentUpon>ModeloEscuela.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Alumno_Materia.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Calificacion.cs">
@@ -81,12 +88,6 @@
     </Compile>
     <Compile Include="Modelo\Escuela.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
-    </Compile>
-    <Compile Include="frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Materia.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
@@ -106,7 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\nota.cs">
+    <Compile Include="Modelo\NotaPorPeriodo.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Persona.cs">
@@ -121,14 +122,17 @@
     <Compile Include="Modelo\Profesor_Materia.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modelo\Role.cs">
+      <DependentUpon>ModeloEscuela.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\sysdiagram.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Usuario.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Formularios\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,16 +174,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modelo\ModeloEscuela.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloEscuela.edmx</DependentUpon>
-      <LastGenOutput>ModeloEscuela.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Modelo\ModeloEscuela.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloEscuela.edmx</DependentUpon>
-      <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\exit.png" />
     <None Include="Resources\user-delete.png" />
     <None Include="Resources\user-editar.png" />
@@ -209,6 +203,19 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Modelo\ModeloEscuela.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloEscuela.edmx</DependentUpon>
+      <LastGenOutput>ModeloEscuela.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\ModeloEscuela.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloEscuela.edmx</DependentUpon>
+      <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

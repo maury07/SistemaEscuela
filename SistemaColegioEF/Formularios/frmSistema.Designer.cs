@@ -42,6 +42,7 @@
             this.gbListaUsuarios = new System.Windows.Forms.GroupBox();
             this.dgvUsuariosSys = new System.Windows.Forms.DataGridView();
             this.gbSistema_ABM = new System.Windows.Forms.GroupBox();
+            this.btnCancelarSys = new System.Windows.Forms.Button();
             this.btnGuardarSys = new System.Windows.Forms.Button();
             this.cbPermisosSys = new System.Windows.Forms.ComboBox();
             this.lblPermisoSys = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.tbUsuarioSys = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblContraseñaSys = new System.Windows.Forms.Label();
-            this.btnCancelarSys = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -162,6 +162,7 @@
             this.btnEliminarSys.Text = "Eliminar";
             this.btnEliminarSys.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEliminarSys.UseVisualStyleBackColor = false;
+            this.btnEliminarSys.Click += new System.EventHandler(this.btnEliminarSys_Click);
             // 
             // btnEditarSys
             // 
@@ -176,6 +177,7 @@
             this.btnEditarSys.Text = "Editar";
             this.btnEditarSys.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEditarSys.UseVisualStyleBackColor = false;
+            this.btnEditarSys.Click += new System.EventHandler(this.btnEditarSys_Click);
             // 
             // btnNuevoSys
             // 
@@ -244,9 +246,9 @@
             this.dgvUsuariosSys.Name = "dgvUsuariosSys";
             this.dgvUsuariosSys.ReadOnly = true;
             this.dgvUsuariosSys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuariosSys.Size = new System.Drawing.Size(534, 114);
+            this.dgvUsuariosSys.Size = new System.Drawing.Size(518, 114);
             this.dgvUsuariosSys.TabIndex = 1;
-            this.dgvUsuariosSys.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuariosSys_CellContentClick);
+            this.dgvUsuariosSys.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuariosSys_CellClick);
             // 
             // gbSistema_ABM
             // 
@@ -268,6 +270,18 @@
             this.gbSistema_ABM.TabIndex = 0;
             this.gbSistema_ABM.TabStop = false;
             this.gbSistema_ABM.Text = "Gestion de Usuarios";
+            // 
+            // btnCancelarSys
+            // 
+            this.btnCancelarSys.BackColor = System.Drawing.Color.IndianRed;
+            this.btnCancelarSys.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCancelarSys.Location = new System.Drawing.Point(450, 72);
+            this.btnCancelarSys.Name = "btnCancelarSys";
+            this.btnCancelarSys.Size = new System.Drawing.Size(101, 21);
+            this.btnCancelarSys.TabIndex = 6;
+            this.btnCancelarSys.Text = "Cancelar";
+            this.btnCancelarSys.UseVisualStyleBackColor = false;
+            this.btnCancelarSys.Click += new System.EventHandler(this.btnCancelarSys_Click);
             // 
             // btnGuardarSys
             // 
@@ -329,18 +343,6 @@
             this.lblContraseñaSys.Size = new System.Drawing.Size(50, 13);
             this.lblContraseñaSys.TabIndex = 0;
             this.lblContraseñaSys.Text = "Usuario";
-            // 
-            // btnCancelarSys
-            // 
-            this.btnCancelarSys.BackColor = System.Drawing.Color.IndianRed;
-            this.btnCancelarSys.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancelarSys.Location = new System.Drawing.Point(450, 72);
-            this.btnCancelarSys.Name = "btnCancelarSys";
-            this.btnCancelarSys.Size = new System.Drawing.Size(101, 21);
-            this.btnCancelarSys.TabIndex = 6;
-            this.btnCancelarSys.Text = "Cancelar";
-            this.btnCancelarSys.UseVisualStyleBackColor = false;
-            this.btnCancelarSys.Click += new System.EventHandler(this.btnCancelarSys_Click);
             // 
             // frmSistema
             // 

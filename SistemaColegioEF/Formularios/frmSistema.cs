@@ -19,17 +19,24 @@ namespace SistemaColegioEF.Formularios
             InitializeComponent();
         }
 
-        EscuelaDBEntities db = new EscuelaDBEntities();
+        EscuelaDB db = new EscuelaDB();
         public void cargaUsuarios()
         {
             var result = from u in db.Usuarios
-                         join r in db.Roles on u.idUsuario equals r.idUsuario
+                         join r in db.Roles on u.idRol equals r.idRoles
                          select new { u.idUsuario, u.usuario1, u.pass, r.permiso };
 
             dgvUsuariosSys.DataSource = result.ToList();
         }
+        public void listarUsuarios()
+        {
+            dgvUsuariosSys.DataSource = null;
+            cargaUsuarios();
+            tbBusquedaUsuarioNombre.Clear();
+        }
 
-        int idUser;
+        int idUser, idRol;
+        bool editar = false;
 
         private void frmSistema_Load(object sender, EventArgs e)
         {
@@ -37,7 +44,7 @@ namespace SistemaColegioEF.Formularios
             cbPermisosSys.Items.Clear();
             cargarPermisos();
             dgvUsuariosSys.ClearSelection();
-
+            idRol = int.Parse(cbPermisosSys.SelectedValue.ToString());
         }
 
         public void cargarPermisos() 
@@ -67,9 +74,7 @@ namespace SistemaColegioEF.Formularios
 
         private void btnListarUsuariosSys_Click(object sender, EventArgs e)
         {
-            dgvUsuariosSys.DataSource = null;
-            cargaUsuarios();
-            tbBusquedaUsuarioNombre.Clear();
+            listarUsuarios();
         }
 
         private void btnNuevoSys_Click(object sender, EventArgs e)
@@ -80,18 +85,11 @@ namespace SistemaColegioEF.Formularios
             btnEditarSys.Enabled = false;
             btnEliminarSys.Enabled = false;
             gbSistema_ABM.Enabled = true;
+            btnGuardarSys.Text = "Guardar";
+            editar = false;
         }
 
-        private void dgvUsuariosSys_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEditarSys.Enabled = true;
-            btnEliminarSys.Enabled = true;
-            gbSistema_ABM.Enabled = true;
-            btnNuevoSys.Enabled = false;
-            idUser = int.Parse(dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[0].Value.ToString());
-            tbUsuarioSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[1].Value.ToString();
-            tbContraseñaSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[2].Value.ToString();
-        }
+
 
         private void btnCancelarSys_Click(object sender, EventArgs e)
         {
@@ -105,7 +103,7 @@ namespace SistemaColegioEF.Formularios
         private void tbBusquedaUsuarioNombre_TextChanged(object sender, EventArgs e)
         {
             var temp = from u in db.Usuarios
-                       join r in db.Roles on u.idUsuario equals r.idUsuario
+                       join r in db.Roles on u.idRol equals r.idRoles
                        where u.usuario1.StartsWith(tbBusquedaUsuarioNombre.Text)
                        select new { u.idUsuario, u.usuario1, u.pass, r.permiso };
 
@@ -114,7 +112,96 @@ namespace SistemaColegioEF.Formularios
 
         private void btnGuardarSys_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(idUser.ToString() + ", " + tbUsuarioSys.Text + ", " + tbContraseñaSys.Text+", "+ cbPermisosSys.SelectedItem.ToString());
+            //MessageBox.Show(idUser.ToString() + ", " + tbUsuarioSys.Text + ", " + tbContraseñaSys.Text+", "+ cbPermisosSys.SelectedText + ", "+ cbPermisosSys.SelectedValue.ToString());
+            if (editar)
+            {
+                try
+                {
+                    var query = (from a in db.Usuarios
+                                 where a.idUsuario == idUser
+                                 select a).FirstOrDefault();
+
+                    query.idUsuario = idUser;
+                    query.pass = tbContraseñaSys.Text;
+                    query.usuario1 = tbUsuarioSys.Text;
+                    query.idRol = idRol;
+
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                { }
+            }
+            else
+            {
+                try
+                {
+                    Usuario oUser = new Usuario();
+                    oUser.usuario1 = tbUsuarioSys.Text;
+                    oUser.pass = tbContraseñaSys.Text;
+                    oUser.idRol = int.Parse(cbPermisosSys.SelectedValue.ToString());
+                    db.Usuarios.Add(oUser);
+                    
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                { }
+            }
+
+            listarUsuarios();
+        }
+
+        private void btnEditarSys_Click(object sender, EventArgs e)
+        {
+            btnGuardarSys.Text = "Modificar";
+            editar = true;
+        }
+
+        private void dgvUsuariosSys_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnGuardarSys.Text = "Modificar";
+            btnEditarSys.Enabled = true;
+            btnEliminarSys.Enabled = true;
+            gbSistema_ABM.Enabled = true;
+            btnNuevoSys.Enabled = false;
+            idUser = int.Parse(dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[0].Value.ToString());
+            tbUsuarioSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[1].Value.ToString();
+            tbContraseñaSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[2].Value.ToString();
+            cbPermisosSys.SelectedValue = cambiaComboBox(dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[3].Value.ToString());
+        }
+
+        private void btnEliminarSys_Click(object sender, EventArgs e)
+        {
+            DialogResult dgEliminar = MessageBox.Show(this, "¿Está seguro que desea eliminar el usuario?", "¡Atención!",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dgEliminar == DialogResult.Yes)
+            {
+                Usuario oUser = (from a in db.Usuarios
+                             where a.idUsuario == idUser
+                             select a).FirstOrDefault();
+                db.Usuarios.Remove(oUser);
+                db.SaveChanges();
+            }
+            listarUsuarios();
+        }
+
+        public int cambiaComboBox(string rol)
+        {
+            int rol_id = 0;
+
+            var result1 = from roles in db.Roles
+                          select roles;
+
+            List<Role> listaRoles = new List<Role>();
+            listaRoles = result1.ToList();
+
+            foreach (var i in listaRoles)
+            {
+                if (rol == i.permiso)
+                { rol_id = i.idRoles; }
+            }
+
+            return rol_id;
+            
         }
     }
 }

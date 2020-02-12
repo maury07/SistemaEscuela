@@ -19,10 +19,10 @@ namespace SistemaColegioEF.Modelo
         public int idProfesor { get; set; }
         public int idAlumno { get; set; }
         public int idMateria { get; set; }
-        public Nullable<int> idNota { get; set; }
+        public Nullable<int> idNotaPorPeriodo { get; set; }
     
         public virtual Alumno Alumno { get; set; }
-        public virtual nota nota { get; set; }
+        public virtual NotaPorPeriodo NotaPorPeriodo { get; set; }
         public virtual Materia Materia { get; set; }
         public virtual Profesor Profesor { get; set; }
     }

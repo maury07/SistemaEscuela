@@ -4,30 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dfba1266317a4280977aa3ac8d81e2bb" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="EscuelaDBModel.Alumno" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.AlumnoAsistencia" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Calificacion" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Escuela" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Materia" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.nota" Width="1.5" PointX="9" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Persona" Width="1.5" PointX="0.875" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.ProfAsistencia" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Profesor" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Profesor_Materia" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Role" Width="1.5" PointX="11" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Usuario" Width="1.5" PointX="8.75" PointY="0.875" IsExpanded="true" />
+      <Diagram DiagramId="e669881a37dd491ab1ad2f03e1f32fb2" Name="Diagram1">
+        <EntityTypeShape EntityType="EscuelaDBModel.Alumno" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Alumno_Materia" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.AlumnoAsistencia" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Calificacion" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Escuela" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Materia" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.NotaPorPeriodo" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Persona" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.ProfAsistencia" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Profesor" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Profesor_Materia" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Role" Width="1.5" PointX="8.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.sysdiagram" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Usuario" Width="1.5" PointX="11" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="EscuelaDBModel.FK__Alumno_Ma__idAlu__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_AlumnoAsis_Alumno" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_CalificacionAlumno" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_PersonaAlumno" ManuallyRouted="false" />
-        <AssociationConnector Association="EscuelaDBModel.FK_Calificacion_Notas" ManuallyRouted="false" />
+        <AssociationConnector Association="EscuelaDBModel.FK__Alumno_Ma__idMat__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="EscuelaDBModel.FK_Calificacion_NotaPeriodo" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_CalificacionMateria" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_CalificacionProf" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_ProfMateria_Materia" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_PersonaProf" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_ProfAsistencia_Prof" ManuallyRouted="false" />
         <AssociationConnector Association="EscuelaDBModel.FK_ProfMateria_Profesor" ManuallyRouted="false" />
-        <AssociationConnector Association="EscuelaDBModel.FK_Rol_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="EscuelaDBModel.FK_Usuario_Rol" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

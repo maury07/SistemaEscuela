@@ -17,6 +17,7 @@ namespace SistemaColegioEF.Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Alumno()
         {
+            this.Alumno_Materia = new HashSet<Alumno_Materia>();
             this.AlumnoAsistencias = new HashSet<AlumnoAsistencia>();
             this.Calificacions = new HashSet<Calificacion>();
         }
@@ -26,6 +27,8 @@ namespace SistemaColegioEF.Modelo
         public string nroLegajo { get; set; }
         public Nullable<int> idPersona { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alumno_Materia> Alumno_Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlumnoAsistencia> AlumnoAsistencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

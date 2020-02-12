@@ -14,6 +14,15 @@
           <Property Name="nroLegajo" Type="varchar" MaxLength="50" />
           <Property Name="idPersona" Type="int" />
         </EntityType>
+        <EntityType Name="Alumno_Materia">
+          <Key>
+            <PropertyRef Name="idAlumnoMateria" />
+          </Key>
+          <Property Name="idAlumnoMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAlumno" Type="int" />
+          <Property Name="idMateria" Type="int" />
+          <Property Name="promedio" Type="decimal" Precision="2" Scale="2" />
+        </EntityType>
         <EntityType Name="AlumnoAsistencia">
           <Key>
             <PropertyRef Name="idAlumnoAsistencia" />
@@ -34,7 +43,7 @@
           <Property Name="idProfesor" Type="int" Nullable="false" />
           <Property Name="idAlumno" Type="int" Nullable="false" />
           <Property Name="idMateria" Type="int" Nullable="false" />
-          <Property Name="idNota" Type="int" />
+          <Property Name="idNotaPorPeriodo" Type="int" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -55,15 +64,13 @@
           <Property Name="idMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="notas">
+        <EntityType Name="NotaPorPeriodo">
           <Key>
-            <PropertyRef Name="idNota" />
+            <PropertyRef Name="idNotaPorPeriodo" />
           </Key>
-          <Property Name="idNota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="primerNota" Type="float" />
-          <Property Name="segundaNota" Type="float" />
-          <Property Name="tercerNota" Type="float" />
-          <Property Name="notaFinal" Type="float" />
+          <Property Name="idNotaPorPeriodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nota" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="periodo" Type="int" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -111,7 +118,16 @@
           </Key>
           <Property Name="idRoles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="permiso" Type="varchar" MaxLength="30" />
-          <Property Name="idUsuario" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -120,7 +136,32 @@
           <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="idRol" Type="int" />
         </EntityType>
+        <Association Name="FK__Alumno_Ma__idAlu__6FE99F9F">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alumno_Ma__idMat__70DDC3D8">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="idMateria" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="idMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AlumnoAsis_Alumno">
           <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
           <End Role="AlumnoAsistencia" Type="Self.AlumnoAsistencia" Multiplicity="*" />
@@ -133,15 +174,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Calificacion_Notas">
-          <End Role="notas" Type="Self.notas" Multiplicity="0..1" />
+        <Association Name="FK_Calificacion_NotaPeriodo">
+          <End Role="NotaPorPeriodo" Type="Self.NotaPorPeriodo" Multiplicity="0..1" />
           <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="notas">
-              <PropertyRef Name="idNota" />
+            <Principal Role="NotaPorPeriodo">
+              <PropertyRef Name="idNotaPorPeriodo" />
             </Principal>
             <Dependent Role="Calificacion">
-              <PropertyRef Name="idNota" />
+              <PropertyRef Name="idNotaPorPeriodo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,37 +282,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rol_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
+            <Principal Role="Roles">
+              <PropertyRef Name="idRoles" />
             </Principal>
-            <Dependent Role="Roles">
-              <PropertyRef Name="idUsuario" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EscuelaDBModelStoreContainer">
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alumno_Materia" EntityType="Self.Alumno_Materia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlumnoAsistencia" EntityType="Self.AlumnoAsistencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Escuela" EntityType="Self.Escuela" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="notas" EntityType="Self.notas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotaPorPeriodo" EntityType="Self.NotaPorPeriodo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfAsistencia" EntityType="Self.ProfAsistencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesor_Materia" EntityType="Self.Profesor_Materia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alumno_Ma__idAlu__6FE99F9F" Association="Self.FK__Alumno_Ma__idAlu__6FE99F9F">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alumno_Ma__idMat__70DDC3D8" Association="Self.FK__Alumno_Ma__idMat__70DDC3D8">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
           <AssociationSet Name="FK_AlumnoAsis_Alumno" Association="Self.FK_AlumnoAsis_Alumno">
             <End Role="Alumno" EntitySet="Alumno" />
             <End Role="AlumnoAsistencia" EntitySet="AlumnoAsistencia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Calificacion_Notas" Association="Self.FK_Calificacion_Notas">
-            <End Role="notas" EntitySet="notas" />
+          <AssociationSet Name="FK_Calificacion_NotaPeriodo" Association="Self.FK_Calificacion_NotaPeriodo">
+            <End Role="NotaPorPeriodo" EntitySet="NotaPorPeriodo" />
             <End Role="Calificacion" EntitySet="Calificacion" />
           </AssociationSet>
           <AssociationSet Name="FK_CalificacionAlumno" Association="Self.FK_CalificacionAlumno">
@@ -306,9 +357,9 @@
             <End Role="Profesor" EntitySet="Profesor" />
             <End Role="Profesor_Materia" EntitySet="Profesor_Materia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rol_Usuario" Association="Self.FK_Rol_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
             <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -324,9 +375,21 @@
           <Property Name="año_lectivo" Type="Int32" />
           <Property Name="nroLegajo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idPersona" Type="Int32" />
+          <NavigationProperty Name="Alumno_Materia" Relationship="Self.FK__Alumno_Ma__idAlu__6FE99F9F" FromRole="Alumno" ToRole="Alumno_Materia" />
           <NavigationProperty Name="AlumnoAsistencias" Relationship="Self.FK_AlumnoAsis_Alumno" FromRole="Alumno" ToRole="AlumnoAsistencia" />
           <NavigationProperty Name="Calificacions" Relationship="Self.FK_CalificacionAlumno" FromRole="Alumno" ToRole="Calificacion" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_PersonaAlumno" FromRole="Alumno" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Alumno_Materia">
+          <Key>
+            <PropertyRef Name="idAlumnoMateria" />
+          </Key>
+          <Property Name="idAlumnoMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAlumno" Type="Int32" />
+          <Property Name="idMateria" Type="Int32" />
+          <Property Name="promedio" Type="Decimal" Precision="2" Scale="2" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno_Ma__idAlu__6FE99F9F" FromRole="Alumno_Materia" ToRole="Alumno" />
+          <NavigationProperty Name="Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Alumno_Materia" ToRole="Materia" />
         </EntityType>
         <EntityType Name="AlumnoAsistencia">
           <Key>
@@ -349,9 +412,9 @@
           <Property Name="idProfesor" Type="Int32" Nullable="false" />
           <Property Name="idAlumno" Type="Int32" Nullable="false" />
           <Property Name="idMateria" Type="Int32" Nullable="false" />
-          <Property Name="idNota" Type="Int32" />
+          <Property Name="idNotaPorPeriodo" Type="Int32" />
           <NavigationProperty Name="Alumno" Relationship="Self.FK_CalificacionAlumno" FromRole="Calificacion" ToRole="Alumno" />
-          <NavigationProperty Name="nota" Relationship="Self.FK_Calificacion_Notas" FromRole="Calificacion" ToRole="notas" />
+          <NavigationProperty Name="NotaPorPeriodo" Relationship="Self.FK_Calificacion_NotaPeriodo" FromRole="Calificacion" ToRole="NotaPorPeriodo" />
           <NavigationProperty Name="Materia" Relationship="Self.FK_CalificacionMateria" FromRole="Calificacion" ToRole="Materia" />
           <NavigationProperty Name="Profesor" Relationship="Self.FK_CalificacionProf" FromRole="Calificacion" ToRole="Profesor" />
         </EntityType>
@@ -373,19 +436,18 @@
           </Key>
           <Property Name="idMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Alumno_Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Materia" ToRole="Alumno_Materia" />
           <NavigationProperty Name="Calificacions" Relationship="Self.FK_CalificacionMateria" FromRole="Materia" ToRole="Calificacion" />
           <NavigationProperty Name="Profesor_Materia" Relationship="Self.FK_ProfMateria_Materia" FromRole="Materia" ToRole="Profesor_Materia" />
         </EntityType>
-        <EntityType Name="nota">
+        <EntityType Name="NotaPorPeriodo">
           <Key>
-            <PropertyRef Name="idNota" />
+            <PropertyRef Name="idNotaPorPeriodo" />
           </Key>
-          <Property Name="idNota" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="primerNota" Type="Double" />
-          <Property Name="segundaNota" Type="Double" />
-          <Property Name="tercerNota" Type="Double" />
-          <Property Name="notaFinal" Type="Double" />
-          <NavigationProperty Name="Calificacions" Relationship="Self.FK_Calificacion_Notas" FromRole="notas" ToRole="Calificacion" />
+          <Property Name="idNotaPorPeriodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nota" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="periodo" Type="Int32" />
+          <NavigationProperty Name="Calificacions" Relationship="Self.FK_Calificacion_NotaPeriodo" FromRole="NotaPorPeriodo" ToRole="Calificacion" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -442,8 +504,17 @@
           </Key>
           <Property Name="idRoles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="permiso" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="idUsuario" Type="Int32" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Rol_Usuario" FromRole="Roles" ToRole="Usuario" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Rol" FromRole="Roles" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -452,8 +523,21 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Rol_Usuario" FromRole="Usuario" ToRole="Roles" />
+          <Property Name="idRol" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Roles" />
         </EntityType>
+        <Association Name="FK__Alumno_Ma__idAlu__6FE99F9F">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AlumnoAsis_Alumno">
           <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
           <End Role="AlumnoAsistencia" Type="Self.AlumnoAsistencia" Multiplicity="*" />
@@ -490,15 +574,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Calificacion_Notas">
-          <End Role="notas" Type="Self.nota" Multiplicity="0..1" />
+        <Association Name="FK__Alumno_Ma__idMat__70DDC3D8">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="idMateria" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="idMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_NotaPeriodo">
+          <End Role="NotaPorPeriodo" Type="Self.NotaPorPeriodo" Multiplicity="0..1" />
           <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="notas">
-              <PropertyRef Name="idNota" />
+            <Principal Role="NotaPorPeriodo">
+              <PropertyRef Name="idNotaPorPeriodo" />
             </Principal>
             <Dependent Role="Calificacion">
-              <PropertyRef Name="idNota" />
+              <PropertyRef Name="idNotaPorPeriodo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -574,31 +670,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rol_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
+            <Principal Role="Roles">
+              <PropertyRef Name="idRoles" />
             </Principal>
-            <Dependent Role="Roles">
-              <PropertyRef Name="idUsuario" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EscuelaDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EscuelaDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alumnoes" EntityType="Self.Alumno" />
+          <EntitySet Name="Alumno_Materia" EntityType="Self.Alumno_Materia" />
           <EntitySet Name="AlumnoAsistencias" EntityType="Self.AlumnoAsistencia" />
           <EntitySet Name="Calificacions" EntityType="Self.Calificacion" />
           <EntitySet Name="Escuelas" EntityType="Self.Escuela" />
           <EntitySet Name="Materias" EntityType="Self.Materia" />
-          <EntitySet Name="notas" EntityType="Self.nota" />
+          <EntitySet Name="NotaPorPeriodoes" EntityType="Self.NotaPorPeriodo" />
           <EntitySet Name="Personas" EntityType="Self.Persona" />
           <EntitySet Name="ProfAsistencias" EntityType="Self.ProfAsistencia" />
           <EntitySet Name="Profesors" EntityType="Self.Profesor" />
           <EntitySet Name="Profesor_Materia" EntityType="Self.Profesor_Materia" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Alumno_Ma__idAlu__6FE99F9F" Association="Self.FK__Alumno_Ma__idAlu__6FE99F9F">
+            <End Role="Alumno" EntitySet="Alumnoes" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
           <AssociationSet Name="FK_AlumnoAsis_Alumno" Association="Self.FK_AlumnoAsis_Alumno">
             <End Role="Alumno" EntitySet="Alumnoes" />
             <End Role="AlumnoAsistencia" EntitySet="AlumnoAsistencias" />
@@ -611,8 +713,12 @@
             <End Role="Persona" EntitySet="Personas" />
             <End Role="Alumno" EntitySet="Alumnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Calificacion_Notas" Association="Self.FK_Calificacion_Notas">
-            <End Role="notas" EntitySet="notas" />
+          <AssociationSet Name="FK__Alumno_Ma__idMat__70DDC3D8" Association="Self.FK__Alumno_Ma__idMat__70DDC3D8">
+            <End Role="Materia" EntitySet="Materias" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_NotaPeriodo" Association="Self.FK_Calificacion_NotaPeriodo">
+            <End Role="NotaPorPeriodo" EntitySet="NotaPorPeriodoes" />
             <End Role="Calificacion" EntitySet="Calificacions" />
           </AssociationSet>
           <AssociationSet Name="FK_CalificacionMateria" Association="Self.FK_CalificacionMateria">
@@ -639,9 +745,9 @@
             <End Role="Profesor" EntitySet="Profesors" />
             <End Role="Profesor_Materia" EntitySet="Profesor_Materia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rol_Usuario" Association="Self.FK_Rol_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
             <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -649,7 +755,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EscuelaDBModelStoreContainer" CdmEntityContainer="EscuelaDBEntities">
+        <EntityContainerMapping StorageEntityContainer="EscuelaDBModelStoreContainer" CdmEntityContainer="EscuelaDB">
           <EntitySetMapping Name="Alumnoes">
             <EntityTypeMapping TypeName="EscuelaDBModel.Alumno">
               <MappingFragment StoreEntitySet="Alumno">
@@ -657,6 +763,16 @@
                 <ScalarProperty Name="año_lectivo" ColumnName="año_lectivo" />
                 <ScalarProperty Name="nroLegajo" ColumnName="nroLegajo" />
                 <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alumno_Materia">
+            <EntityTypeMapping TypeName="EscuelaDBModel.Alumno_Materia">
+              <MappingFragment StoreEntitySet="Alumno_Materia">
+                <ScalarProperty Name="idAlumnoMateria" ColumnName="idAlumnoMateria" />
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+                <ScalarProperty Name="idMateria" ColumnName="idMateria" />
+                <ScalarProperty Name="promedio" ColumnName="promedio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -677,7 +793,7 @@
                 <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
                 <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
                 <ScalarProperty Name="idMateria" ColumnName="idMateria" />
-                <ScalarProperty Name="idNota" ColumnName="idNota" />
+                <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -702,14 +818,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="notas">
-            <EntityTypeMapping TypeName="EscuelaDBModel.nota">
-              <MappingFragment StoreEntitySet="notas">
-                <ScalarProperty Name="idNota" ColumnName="idNota" />
-                <ScalarProperty Name="primerNota" ColumnName="primerNota" />
-                <ScalarProperty Name="segundaNota" ColumnName="segundaNota" />
-                <ScalarProperty Name="tercerNota" ColumnName="tercerNota" />
-                <ScalarProperty Name="notaFinal" ColumnName="notaFinal" />
+          <EntitySetMapping Name="NotaPorPeriodoes">
+            <EntityTypeMapping TypeName="EscuelaDBModel.NotaPorPeriodo">
+              <MappingFragment StoreEntitySet="NotaPorPeriodo">
+                <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
+                <ScalarProperty Name="nota" ColumnName="nota" />
+                <ScalarProperty Name="periodo" ColumnName="periodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -762,7 +876,17 @@
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="idRoles" ColumnName="idRoles" />
                 <ScalarProperty Name="permiso" ColumnName="permiso" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EscuelaDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -772,6 +896,7 @@
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="usuario1" ColumnName="usuario" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

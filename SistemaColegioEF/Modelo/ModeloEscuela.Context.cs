@@ -13,10 +13,10 @@ namespace SistemaColegioEF.Modelo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EscuelaDBEntities : DbContext
+    public partial class EscuelaDB : DbContext
     {
-        public EscuelaDBEntities()
-            : base("name=EscuelaDBEntities")
+        public EscuelaDB()
+            : base("name=EscuelaDB")
         {
         }
     
@@ -26,16 +26,18 @@ namespace SistemaColegioEF.Modelo
         }
     
         public virtual DbSet<Alumno> Alumnoes { get; set; }
+        public virtual DbSet<Alumno_Materia> Alumno_Materia { get; set; }
         public virtual DbSet<AlumnoAsistencia> AlumnoAsistencias { get; set; }
         public virtual DbSet<Calificacion> Calificacions { get; set; }
         public virtual DbSet<Escuela> Escuelas { get; set; }
         public virtual DbSet<Materia> Materias { get; set; }
-        public virtual DbSet<nota> notas { get; set; }
+        public virtual DbSet<NotaPorPeriodo> NotaPorPeriodoes { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<ProfAsistencia> ProfAsistencias { get; set; }
         public virtual DbSet<Profesor> Profesors { get; set; }
         public virtual DbSet<Profesor_Materia> Profesor_Materia { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
     }
 }

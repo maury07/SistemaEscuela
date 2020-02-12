@@ -19,7 +19,7 @@ namespace SistemaColegioEF
             InitializeComponent();
         }
 
-        EscuelaDBEntities db = new EscuelaDBEntities();
+        EscuelaDB db = new EscuelaDB();
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbUsuario.Text))
@@ -31,7 +31,7 @@ namespace SistemaColegioEF
             try
             {
                 var result = from u in db.Usuarios
-                            join r in db.Roles on u.idUsuario equals r.idUsuario
+                            join r in db.Roles on u.idRol equals r.idRoles
                             where u.usuario1 == tbUsuario.Text && u.pass == tbContraseña.Text
                             select new { Id = u.idUsuario, User = u.usuario1, Pass = u.pass, Permiso = r.permiso};
 
