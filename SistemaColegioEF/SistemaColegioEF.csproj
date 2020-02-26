@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formularios\frmEstudiantes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmEstudiantes.Designer.cs">
+      <DependentUpon>frmEstudiantes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Formularios\frmEstudiantes.resx">
+      <DependentUpon>frmEstudiantes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +225,8 @@
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
       <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\panel2.jpg" />
+    <None Include="Resources\panel1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
