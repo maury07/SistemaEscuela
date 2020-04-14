@@ -21,7 +21,7 @@ namespace SistemaColegioEF.Formularios
             lblUsuario.Text = usuario;
             lblPermiso.Text = permiso;
             logueado = true;
-            var a = permiso == "total" ? btnSistema.Enabled = true : btnSistema.Enabled = false;
+            _ = permiso == "total" ? btnSistema.Enabled = true : btnSistema.Enabled = false;
 
         }
 
@@ -78,12 +78,6 @@ namespace SistemaColegioEF.Formularios
         {
             frmSistema oFrmSistema = new frmSistema();
             oFrmSistema.ShowDialog();
-        }
-
-        private void btnEstudiantes_Click(object sender, EventArgs e)
-        {
-            frmEstudiantes oFrmEstudiantes = new frmEstudiantes();
-            oFrmEstudiantes.ShowDialog();
         }
     }
 }

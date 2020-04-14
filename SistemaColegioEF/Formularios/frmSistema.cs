@@ -82,6 +82,7 @@ namespace SistemaColegioEF.Formularios
             tbUsuarioSys.Clear();
             tbContraseñaSys.Clear();
             tbUsuarioSys.Focus();
+            btnEditarSys.Enabled = false;
             btnEliminarSys.Enabled = false;
             gbSistema_ABM.Enabled = true;
             btnGuardarSys.Text = "Guardar";
@@ -94,6 +95,7 @@ namespace SistemaColegioEF.Formularios
         {
             btnNuevoSys.Enabled = true;
             btnEliminarSys.Enabled = true;
+            btnEditarSys.Enabled = true;
             tbUsuarioSys.Clear();
             tbContraseñaSys.Clear();
         }
@@ -144,20 +146,23 @@ namespace SistemaColegioEF.Formularios
                 catch (Exception ex)
                 { }
             }
-            tbUsuarioSys.Clear();
-            tbContraseñaSys.Clear();
-            tbUsuarioSys.Focus();
+
             listarUsuarios();
         }
 
+        private void btnEditarSys_Click(object sender, EventArgs e)
+        {
+            btnGuardarSys.Text = "Modificar";
+            editar = true;
+        }
 
         private void dgvUsuariosSys_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btnGuardarSys.Text = "Modificar";
+            btnEditarSys.Enabled = true;
             btnEliminarSys.Enabled = true;
             gbSistema_ABM.Enabled = true;
             btnNuevoSys.Enabled = false;
-            editar = true;
             idUser = int.Parse(dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[0].Value.ToString());
             tbUsuarioSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[1].Value.ToString();
             tbContraseñaSys.Text = dgvUsuariosSys.Rows[dgvUsuariosSys.CurrentRow.Index].Cells[2].Value.ToString();

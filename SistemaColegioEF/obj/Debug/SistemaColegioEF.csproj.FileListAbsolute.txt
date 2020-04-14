@@ -28,5 +28,3 @@ C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\Sistema
 C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.exe
 C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
 C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources
-C:\Users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources
-C:\Users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmEstudiantes.resources
