@@ -217,6 +217,7 @@
             this.btnEstudiantes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEstudiantes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEstudiantes.UseVisualStyleBackColor = true;
+            this.btnEstudiantes.Click += new System.EventHandler(this.btnEstudiantes_Click);
             // 
             // btnSistema
             // 

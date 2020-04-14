@@ -34,7 +34,6 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.btnSalirSys = new System.Windows.Forms.Button();
             this.btnEliminarSys = new System.Windows.Forms.Button();
-            this.btnEditarSys = new System.Windows.Forms.Button();
             this.btnNuevoSys = new System.Windows.Forms.Button();
             this.btnListarUsuariosSys = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -121,7 +120,6 @@
             this.splitContainer2.Panel1.BackgroundImage = global::SistemaColegioEF.Properties.Resources.celeste;
             this.splitContainer2.Panel1.Controls.Add(this.btnSalirSys);
             this.splitContainer2.Panel1.Controls.Add(this.btnEliminarSys);
-            this.splitContainer2.Panel1.Controls.Add(this.btnEditarSys);
             this.splitContainer2.Panel1.Controls.Add(this.btnNuevoSys);
             // 
             // splitContainer2.Panel2
@@ -133,7 +131,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.gbListaUsuarios);
             this.splitContainer2.Panel2.Controls.Add(this.gbSistema_ABM);
             this.splitContainer2.Size = new System.Drawing.Size(721, 345);
-            this.splitContainer2.SplitterDistance = 81;
+            this.splitContainer2.SplitterDistance = 82;
             this.splitContainer2.TabIndex = 0;
             // 
             // btnSalirSys
@@ -155,7 +153,7 @@
             this.btnEliminarSys.Enabled = false;
             this.btnEliminarSys.Image = global::SistemaColegioEF.Properties.Resources.user_delete;
             this.btnEliminarSys.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEliminarSys.Location = new System.Drawing.Point(10, 167);
+            this.btnEliminarSys.Location = new System.Drawing.Point(10, 89);
             this.btnEliminarSys.Name = "btnEliminarSys";
             this.btnEliminarSys.Size = new System.Drawing.Size(59, 73);
             this.btnEliminarSys.TabIndex = 2;
@@ -163,21 +161,6 @@
             this.btnEliminarSys.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEliminarSys.UseVisualStyleBackColor = false;
             this.btnEliminarSys.Click += new System.EventHandler(this.btnEliminarSys_Click);
-            // 
-            // btnEditarSys
-            // 
-            this.btnEditarSys.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnEditarSys.Enabled = false;
-            this.btnEditarSys.Image = global::SistemaColegioEF.Properties.Resources.user_editar;
-            this.btnEditarSys.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEditarSys.Location = new System.Drawing.Point(10, 89);
-            this.btnEditarSys.Name = "btnEditarSys";
-            this.btnEditarSys.Size = new System.Drawing.Size(59, 72);
-            this.btnEditarSys.TabIndex = 1;
-            this.btnEditarSys.Text = "Editar";
-            this.btnEditarSys.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEditarSys.UseVisualStyleBackColor = false;
-            this.btnEditarSys.Click += new System.EventHandler(this.btnEditarSys_Click);
             // 
             // btnNuevoSys
             // 
@@ -350,8 +333,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 448);
             this.Controls.Add(this.splitContainer1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmSistema";
-            this.Text = "frmSistema";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmSistema_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -380,7 +366,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btnSalirSys;
         private System.Windows.Forms.Button btnEliminarSys;
-        private System.Windows.Forms.Button btnEditarSys;
         private System.Windows.Forms.Button btnNuevoSys;
         private System.Windows.Forms.DataGridView dgvUsuariosSys;
         private System.Windows.Forms.GroupBox gbSistema_ABM;
