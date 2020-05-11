@@ -150,7 +150,6 @@ namespace SistemaColegioEF.Formularios
             listarUsuarios();
         }
 
-
         private void dgvUsuariosSys_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btnGuardarSys.Text = "Modificar";

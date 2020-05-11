@@ -30,3 +30,23 @@ C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\Sistema
 C:\Users\Joaquina\Source\Repos\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources
 C:\Users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources
 C:\Users\mauricio\documents\visual studio 2015\Projects\SistemaColegioEF\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmEstudiantes.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe.config
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.exe
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\SistemaColegioEF.pdb
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.dll
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.xml
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Controls.ucAbm.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmEstudiantes.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmHome.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmSistema.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.frmLogin.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Properties.Resources.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.GenerateResource.cache
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.CoreCompileInputs.cache
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csproj.CopyComplete
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.exe
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Controls.ucBusqueda.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csprojAssemblyReference.cache

@@ -87,13 +87,13 @@
       <PropertyRef Name="idPersona" />
     </Key>
     <Property Name="idPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="dni" Type="Int32" Nullable="false" />
+    <Property Name="dni" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="fechaNac" Type="DateTime" Precision="0" />
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="telefono" Type="Int32" />
+    <Property Name="telefono" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
     <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Alumnoes" Relationship="Self.FK_PersonaAlumno" FromRole="Persona" ToRole="Alumno" />
     <NavigationProperty Name="Profesors" Relationship="Self.FK_PersonaProf" FromRole="Persona" ToRole="Profesor" />

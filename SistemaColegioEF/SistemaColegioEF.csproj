@@ -56,6 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ucAbm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ucAbm.Designer.cs">
+      <DependentUpon>ucAbm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ucBusqueda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ucBusqueda.Designer.cs">
+      <DependentUpon>ucBusqueda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmEstudiantes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +92,7 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funciones\DataEventArgs.cs" />
     <Compile Include="Modelo\Alumno.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>
@@ -139,6 +152,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ucAbm.resx">
+      <DependentUpon>ucAbm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ucBusqueda.resx">
+      <DependentUpon>ucBusqueda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmEstudiantes.resx">
       <DependentUpon>frmEstudiantes.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +244,11 @@
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
       <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\disco-flexible.png" />
+    <None Include="Resources\lapiz.png" />
+    <None Include="Resources\comprobar.png" />
+    <None Include="Resources\cerrar.png" />
+    <None Include="Resources\eliminar.png" />
     <None Include="Resources\panel2.jpg" />
     <None Include="Resources\panel1.jpg" />
   </ItemGroup>

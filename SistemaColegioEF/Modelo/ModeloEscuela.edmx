@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EscuelaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EscuelaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="idAlumno" />
@@ -77,13 +77,13 @@
             <PropertyRef Name="idPersona" />
           </Key>
           <Property Name="idPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dni" Type="int" Nullable="false" />
+          <Property Name="dni" Type="varchar" MaxLength="50" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="sexo" Type="char" MaxLength="1" />
           <Property Name="fechaNac" Type="date" />
           <Property Name="direccion" Type="varchar" MaxLength="50" />
-          <Property Name="telefono" Type="int" />
+          <Property Name="telefono" Type="varchar" MaxLength="30" />
           <Property Name="email" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="ProfAsistencia">
@@ -282,7 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Rol">
+        <Association Name="FK_UsuarioRol">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -357,13 +357,12 @@
             <End Role="Profesor" EntitySet="Profesor" />
             <End Role="Profesor_Materia" EntitySet="Profesor_Materia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+          <AssociationSet Name="FK_UsuarioRol" Association="Self.FK_UsuarioRol">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EscuelaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -454,13 +453,13 @@
             <PropertyRef Name="idPersona" />
           </Key>
           <Property Name="idPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dni" Type="Int32" Nullable="false" />
+          <Property Name="dni" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="fechaNac" Type="DateTime" Precision="0" />
           <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="Int32" />
+          <Property Name="telefono" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Alumnoes" Relationship="Self.FK_PersonaAlumno" FromRole="Persona" ToRole="Alumno" />
           <NavigationProperty Name="Profesors" Relationship="Self.FK_PersonaProf" FromRole="Persona" ToRole="Profesor" />

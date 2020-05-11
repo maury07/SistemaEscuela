@@ -69,10 +69,10 @@ namespace SistemaColegioEF.Formularios
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        /*private void timer1_Tick(object sender, EventArgs e)
         {
             lblHoraActual.Text = DateTime.Now.ToString("HH:mm:ss tt");
-        }
+        }*/
 
         private void btnSistema_Click(object sender, EventArgs e)
         {
