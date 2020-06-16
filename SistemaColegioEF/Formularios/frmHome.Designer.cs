@@ -204,6 +204,7 @@
             this.btnProfesores.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnProfesores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnProfesores.UseVisualStyleBackColor = true;
+            this.btnProfesores.Click += new System.EventHandler(this.btnProfesores_Click);
             // 
             // btnEstudiantes
             // 
@@ -232,10 +233,6 @@
             this.btnSistema.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSistema.UseVisualStyleBackColor = true;
             this.btnSistema.Click += new System.EventHandler(this.btnSistema_Click);
-            // 
-            // timer1
-            // 
-               //this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmHome
             // 
