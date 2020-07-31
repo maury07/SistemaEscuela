@@ -80,6 +80,12 @@
     <Compile Include="Formularios\frmHome.Designer.cs">
       <DependentUpon>frmHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmMaterias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmMaterias.Designer.cs">
+      <DependentUpon>frmMaterias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmProfesores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     <EmbeddedResource Include="Formularios\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmMaterias.resx">
+      <DependentUpon>frmMaterias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmProfesores.resx">
       <DependentUpon>frmProfesores.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +262,7 @@
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
       <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\panel6.jpg" />
     <None Include="Resources\panel5.jpg" />
     <None Include="Resources\panel4.jpg" />
     <None Include="Resources\panel3.jpg" />

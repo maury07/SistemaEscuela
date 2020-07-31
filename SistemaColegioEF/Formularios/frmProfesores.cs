@@ -49,6 +49,7 @@ namespace SistemaColegioEF.Formularios
             abm.deshabilitarCampos += deshabilitCampos;
             abm.deshabilitarGrilla += deshabilitGrilla;
             abm.habilitarGrilla += habilitGrilla;
+            abm.deshabilitarEdit += deshabilitEdit;
             busq.textChanged += tbBusqueda_TextChanged;
             pnlBusqueda.Controls.Add(busq);
             pnlAbm.Controls.Add(abm);
@@ -159,6 +160,7 @@ namespace SistemaColegioEF.Formularios
             profesor.nivel = tbNivelProf.Text;
 
             db.SaveChanges();
+            MessageBox.Show("Se modificó el registo con éxito!");
         }
 
         public void eliminar(object sender, EventArgs e)
@@ -307,6 +309,10 @@ namespace SistemaColegioEF.Formularios
             dgvProfesores.Enabled = false;
         }
 
+        public void deshabilitEdit()
+        {
+            edit = false;
+        }
         #endregion
 
         #region VALIDACION DE CAMPOS NUMERICOS

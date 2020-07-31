@@ -51,3 +51,4 @@ C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\Sis
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Controls.ucBusqueda.resources
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmProfesores.resources
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csprojAssemblyReference.cache
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmMaterias.resources

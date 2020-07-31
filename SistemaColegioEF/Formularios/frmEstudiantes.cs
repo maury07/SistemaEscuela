@@ -49,6 +49,7 @@ namespace SistemaColegioEF.Formularios
             abm.deshabilitarCampos += deshabilitCampos;
             abm.deshabilitarGrilla += deshabilitGrilla;
             abm.habilitarGrilla += habilitGrilla;
+            abm.deshabilitarEdit += deshabilitEdit;
             busq.textChanged += tbBusqueda_TextChanged;
             pnlBusqueda.Controls.Add(busq);
             pnlAbm.Controls.Add(abm);
@@ -304,6 +305,11 @@ namespace SistemaColegioEF.Formularios
         public void deshabilitGrilla(object sender, EventArgs e)
         {
             dgvAlumnos.Enabled = false;
+        }
+
+        public void deshabilitEdit()
+        {
+            edit = false;
         }
 
         #endregion

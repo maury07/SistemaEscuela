@@ -59,6 +59,7 @@ namespace SistemaColegioEF.Controls
                 {
                     pnlAceptCancel.Visible = Valid ? false : true;
                     limpiar(sender, args);
+                    deshabilitarEdit();
                 }
             });
 
@@ -67,10 +68,12 @@ namespace SistemaColegioEF.Controls
                 OnClickCancelar?.Invoke(sender, args);
                 pnlAceptCancel.Visible = false;
                 limpiar(sender, args);
+                deshabilitarEdit();
                 
             });
         }
         public delegate void ButtonClick(object sender, EventArgs e);
+        public delegate void boolButton();
         public event ButtonClick OnClickAgregar;
         public event ButtonClick OnClickEliminar;
         public event ButtonClick OnClickEditar;
@@ -80,6 +83,8 @@ namespace SistemaColegioEF.Controls
         public event ButtonClick deshabilitarCampos;
         public event ButtonClick habilitarGrilla;
         public event ButtonClick deshabilitarGrilla;
+        //public event boolButton habilitarEdit;
+        public event boolButton deshabilitarEdit;
 
         public bool Valid { get; set; }
         public ucAbm(bool valid)

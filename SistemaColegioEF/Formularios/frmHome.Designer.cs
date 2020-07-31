@@ -156,7 +156,7 @@
             // btnAsistencias
             // 
             this.btnAsistencias.Image = global::SistemaColegioEF.Properties.Resources.prueba;
-            this.btnAsistencias.Location = new System.Drawing.Point(346, 219);
+            this.btnAsistencias.Location = new System.Drawing.Point(186, 219);
             this.btnAsistencias.Name = "btnAsistencias";
             this.btnAsistencias.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAsistencias.Size = new System.Drawing.Size(138, 127);
@@ -169,7 +169,7 @@
             // btnMaterias
             // 
             this.btnMaterias.Image = global::SistemaColegioEF.Properties.Resources.libro;
-            this.btnMaterias.Location = new System.Drawing.Point(186, 219);
+            this.btnMaterias.Location = new System.Drawing.Point(346, 86);
             this.btnMaterias.Name = "btnMaterias";
             this.btnMaterias.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnMaterias.Size = new System.Drawing.Size(138, 127);
@@ -178,6 +178,7 @@
             this.btnMaterias.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMaterias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnMaterias.UseVisualStyleBackColor = true;
+            this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
             // 
             // btnCalificaciones
             // 
@@ -195,7 +196,7 @@
             // btnProfesores
             // 
             this.btnProfesores.Image = global::SistemaColegioEF.Properties.Resources.profesor;
-            this.btnProfesores.Location = new System.Drawing.Point(346, 83);
+            this.btnProfesores.Location = new System.Drawing.Point(186, 86);
             this.btnProfesores.Name = "btnProfesores";
             this.btnProfesores.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnProfesores.Size = new System.Drawing.Size(138, 127);
@@ -209,7 +210,7 @@
             // btnEstudiantes
             // 
             this.btnEstudiantes.Image = global::SistemaColegioEF.Properties.Resources.estudiante;
-            this.btnEstudiantes.Location = new System.Drawing.Point(186, 83);
+            this.btnEstudiantes.Location = new System.Drawing.Point(26, 86);
             this.btnEstudiantes.Name = "btnEstudiantes";
             this.btnEstudiantes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnEstudiantes.Size = new System.Drawing.Size(138, 127);
@@ -223,7 +224,7 @@
             // btnSistema
             // 
             this.btnSistema.Image = global::SistemaColegioEF.Properties.Resources.bloquear;
-            this.btnSistema.Location = new System.Drawing.Point(26, 83);
+            this.btnSistema.Location = new System.Drawing.Point(346, 219);
             this.btnSistema.Name = "btnSistema";
             this.btnSistema.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSistema.Size = new System.Drawing.Size(138, 127);

@@ -91,5 +91,11 @@ namespace SistemaColegioEF.Formularios
             frmProfesores ofrmProfesores = new frmProfesores();
             ofrmProfesores.ShowDialog();
         }
+
+        private void btnMaterias_Click(object sender, EventArgs e)
+        {
+            frmMaterias ofrmMaterias = new frmMaterias();
+            ofrmMaterias.ShowDialog();
+        }
     }
 }
