@@ -18,6 +18,7 @@ namespace SistemaColegioEF.Modelo
         public int año { get; set; }
         public Nullable<int> idProfesor { get; set; }
         public Nullable<int> idMateria { get; set; }
+        public Nullable<int> activo { get; set; }
     
         public virtual Materia Materia { get; set; }
         public virtual Profesor Profesor { get; set; }

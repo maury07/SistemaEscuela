@@ -55,7 +55,7 @@ namespace SistemaColegioEF
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                throw ex;
             }
 
         }

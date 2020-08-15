@@ -23,15 +23,15 @@ namespace SistemaColegioEF.Formularios
         EscuelaDB db = new EscuelaDB();
         ucAbm abm = new ucAbm();
         int id = 0;
-        string nombreMat = "";
         bool edit;
 
         private void suscribeEventos()
         {
             abm.OnClickAgregar += habilitarTextBox;
+            abm.OnClickAgregar += limpiar;
             abm.OnClickEditar += habilitarTextBox;
             abm.OnClickEliminar += eliminar;
-            abm.OnClickEliminar += eliminar;
+            abm.OnClickEliminar += limpiar;
             abm.OnClickAceptar += confirmar;
             abm.OnClickCancelar += deshabilitarTextBox;
             abm.deshabilitarGrilla += deshabilitGrilla;
@@ -86,9 +86,10 @@ namespace SistemaColegioEF.Formularios
         {
             Materia oMateria = new Materia();
             oMateria.nombre = tbNombreMateria.Text.ToString();
-
+            oMateria.activo = 1;
             db.Materias.Add(oMateria);
             db.SaveChanges();
+            MessageBox.Show("Se agregó el registro con éxito!");
         }
 
         public void editar()
@@ -100,7 +101,7 @@ namespace SistemaColegioEF.Formularios
             materia.nombre = tbNombreMateria.Text;
 
             db.SaveChanges();
-            MessageBox.Show("Se modificó el registo con éxito!");
+            MessageBox.Show("Se modificó el registro con éxito!");
         }
 
         public void eliminar(object sender, EventArgs e)
@@ -113,12 +114,17 @@ namespace SistemaColegioEF.Formularios
                 {
                     try
                     {
-                        Materia oMateria = (from a in db.Materias
-                                              where a.idMateria == id
-                                              select a).FirstOrDefault();
-                        db.Materias.Remove(oMateria);
+                        //Materia oMateria = (from a in db.Materias
+                        //                      where a.idMateria == id
+                        //                      select a).FirstOrDefault();
+                        //db.Materias.Remove(oMateria);
+
+                        var materia = (from a in db.Materias
+                                       where a.idMateria == id
+                                       select a).FirstOrDefault();
+                        materia.activo = 0; //Persona inactiva (Baja lógica)
                         db.SaveChanges();
-                        MessageBox.Show("Se eliminó el registo con éxito!");
+                        MessageBox.Show("Se eliminó el registro con éxito!");
                     }
                     catch (Exception ex)
                     {
@@ -137,12 +143,12 @@ namespace SistemaColegioEF.Formularios
             id = 0;
             tbNombreMateria.Clear();
             tbNombreMateria.Enabled = true;
-            tbNombreMateria.Focus();
         }
 
         public void habilitarTextBox(object sender, EventArgs e)
         {
             tbNombreMateria.Enabled = true;
+            tbNombreMateria.Focus();
         }
 
         public void deshabilitarTextBox(object sender, EventArgs e)
@@ -175,6 +181,7 @@ namespace SistemaColegioEF.Formularios
         {
             edit = true;
         }
+
         public void deshabilitEdit()
         {
             edit = false;
@@ -190,6 +197,7 @@ namespace SistemaColegioEF.Formularios
         public void cargarMaterias()
         {
             var result = from m in db.Materias
+                         where m.activo == 1
                          select new
                          {
                              m.idMateria,
@@ -206,6 +214,8 @@ namespace SistemaColegioEF.Formularios
             cargarMaterias();
             tbNombreMateria.Clear();
             this.dgvMaterias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMaterias.Columns[0].Width = 1;
+            dgvMaterias.Columns[1].HeaderText = "Nombre de Materia";
         }
 
         private void dgvMaterias_CellClick(object sender, DataGridViewCellEventArgs e)

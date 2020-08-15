@@ -35,6 +35,9 @@ namespace SistemaColegioEF.Controls
                     habilitarGrilla?.Invoke(sender, args);
                     return;
                 }
+                deshabilitarCampos?.Invoke(sender, args);
+                deshabilitarEdit();
+                limpiar(sender, args);
             });
 
             btnEditar.Click += new EventHandler((sender, args) =>
@@ -48,8 +51,8 @@ namespace SistemaColegioEF.Controls
                     habilitarGrilla?.Invoke(sender, args);
                     return;
                 }
-                habilitarCampos?.Invoke(sender, args);
                 deshabilitarGrilla?.Invoke(sender, args);
+                habilitarCampos?.Invoke(sender, args);
             });
 
             btnAceptar.Click += new EventHandler((sender, args) =>
@@ -69,7 +72,6 @@ namespace SistemaColegioEF.Controls
                 pnlAceptCancel.Visible = false;
                 limpiar(sender, args);
                 deshabilitarEdit();
-                
             });
         }
         public delegate void ButtonClick(object sender, EventArgs e);

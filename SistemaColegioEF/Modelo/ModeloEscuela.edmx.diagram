@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e669881a37dd491ab1ad2f03e1f32fb2" Name="Diagram1">
-        <EntityTypeShape EntityType="EscuelaDBModel.Alumno" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Alumno" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.Alumno_Materia" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.AlumnoAsistencia" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Calificacion" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.AlumnoAsistencia" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Calificacion" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.Escuela" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Materia" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.NotaPorPeriodo" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Persona" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.ProfAsistencia" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Materia" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.NotaPorPeriodo" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Persona" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.ProfAsistencia" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.Profesor" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EscuelaDBModel.Profesor_Materia" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="EscuelaDBModel.Profesor_Materia" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.Role" Width="1.5" PointX="8.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.sysdiagram" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EscuelaDBModel.Usuario" Width="1.5" PointX="11" PointY="0.875" IsExpanded="true" />

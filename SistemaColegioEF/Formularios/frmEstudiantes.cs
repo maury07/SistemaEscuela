@@ -125,6 +125,7 @@ namespace SistemaColegioEF.Formularios
             oPersona.direccion = tbDireccionAlu.Text;
             oPersona.telefono = tbTelefonoAlu.Text;
             oPersona.email = tbEmailAlu.Text;
+            oPersona.activo = 1;
 
             db.Personas.Add(oPersona);
             db.SaveChanges();
@@ -152,6 +153,7 @@ namespace SistemaColegioEF.Formularios
             persona.direccion = tbDireccionAlu.Text;
             persona.telefono = tbTelefonoAlu.Text;
             persona.email = tbEmailAlu.Text;
+            
             var alumno = (from a in db.Alumnoes
                           where a.idPersona == persona.idPersona
                           select a).FirstOrDefault();
@@ -171,10 +173,14 @@ namespace SistemaColegioEF.Formularios
                 {
                     try
                     {
-                        Alumno oAlumno = (from a in db.Alumnoes
-                                          where a.idPersona == id
-                                          select a).FirstOrDefault();
-                        db.Alumnoes.Remove(oAlumno);
+                        //Alumno oAlumno = (from a in db.Alumnoes
+                        //                  where a.idPersona == id
+                        //                  select a).FirstOrDefault();
+                        //db.Alumnoes.Remove(oAlumno);
+                        var persona = (from a in db.Personas
+                                       where a.idPersona == id
+                                       select a).FirstOrDefault();
+                        persona.activo = 0; //Persona inactiva (Baja lógica)
                         db.SaveChanges();
                         MessageBox.Show("Se eliminó el registo con éxito!");
                     }
@@ -238,6 +244,7 @@ namespace SistemaColegioEF.Formularios
         {
             var result = from p in db.Personas
                          join al in db.Alumnoes on p.idPersona equals al.idPersona
+                         where p.activo == 1
                          select new { p.idPersona, p.nombre, p.apellido, p.dni, p.sexo, p.fechaNac, p.direccion, p.telefono, p.email, al.año_lectivo, al.nroLegajo };
 
             dgvAlumnos.DataSource = result.ToList();
@@ -280,6 +287,7 @@ namespace SistemaColegioEF.Formularios
             tbEmailAlu.Enabled = true;
             tbNroLegajoAlu.Enabled = true;
             tbAñoLectivoAlu.Enabled = true;
+            tbNombreAlu.Focus();
         }
 
         public void deshabilitCampos(object sender, EventArgs e)
@@ -378,9 +386,9 @@ namespace SistemaColegioEF.Formularios
         private void btnSalirAlu_Click(object sender, EventArgs e)
         {
 
-            DialogResult dgEliminar = MessageBox.Show(this, "¿Desea cerrar la sección Alumnos?", "¡Atención!",
+            DialogResult dgCerrar = MessageBox.Show(this, "¿Desea cerrar la sección Alumnos?", "¡Atención!",
             MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (dgEliminar == DialogResult.Yes)
+            if (dgCerrar == DialogResult.Yes)
             {
                 this.Close();
             }

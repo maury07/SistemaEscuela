@@ -23,6 +23,7 @@
     <Property Name="promedio" Type="Decimal" Precision="2" Scale="2" />
     <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno_Ma__idAlu__6FE99F9F" FromRole="Alumno_Materia" ToRole="Alumno" />
     <NavigationProperty Name="Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Alumno_Materia" ToRole="Materia" />
+    <Property Name="activo" Type="Int32" />
   </EntityType>
   <EntityType Name="AlumnoAsistencia">
     <Key>
@@ -50,6 +51,7 @@
     <NavigationProperty Name="NotaPorPeriodo" Relationship="Self.FK_Calificacion_NotaPeriodo" FromRole="Calificacion" ToRole="NotaPorPeriodo" />
     <NavigationProperty Name="Materia" Relationship="Self.FK_CalificacionMateria" FromRole="Calificacion" ToRole="Materia" />
     <NavigationProperty Name="Profesor" Relationship="Self.FK_CalificacionProf" FromRole="Calificacion" ToRole="Profesor" />
+    <Property Name="promedioFinal" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="Escuela">
     <Key>
@@ -72,6 +74,7 @@
     <NavigationProperty Name="Alumno_Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Materia" ToRole="Alumno_Materia" />
     <NavigationProperty Name="Calificacions" Relationship="Self.FK_CalificacionMateria" FromRole="Materia" ToRole="Calificacion" />
     <NavigationProperty Name="Profesor_Materia" Relationship="Self.FK_ProfMateria_Materia" FromRole="Materia" ToRole="Profesor_Materia" />
+    <Property Name="activo" Type="Int32" />
   </EntityType>
   <EntityType Name="NotaPorPeriodo">
     <Key>
@@ -97,6 +100,7 @@
     <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Alumnoes" Relationship="Self.FK_PersonaAlumno" FromRole="Persona" ToRole="Alumno" />
     <NavigationProperty Name="Profesors" Relationship="Self.FK_PersonaProf" FromRole="Persona" ToRole="Profesor" />
+    <Property Name="activo" Type="Int32" />
   </EntityType>
   <EntityType Name="ProfAsistencia">
     <Key>
@@ -130,6 +134,7 @@
     <Property Name="idMateria" Type="Int32" />
     <NavigationProperty Name="Materia" Relationship="Self.FK_ProfMateria_Materia" FromRole="Profesor_Materia" ToRole="Materia" />
     <NavigationProperty Name="Profesor" Relationship="Self.FK_ProfMateria_Profesor" FromRole="Profesor_Materia" ToRole="Profesor" />
+    <Property Name="activo" Type="Int32" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -157,6 +162,7 @@
     <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="idRol" Type="Int32" />
+    <Property Name="activo" Type="Int32" />
     <NavigationProperty Name="Role" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Roles" />
   </EntityType>
   <Association Name="FK__Alumno_Ma__idAlu__6FE99F9F">

@@ -14,6 +14,7 @@
     <EntitySetMapping Name="Alumno_Materia">
       <EntityTypeMapping TypeName="EscuelaDBModel.Alumno_Materia">
         <MappingFragment StoreEntitySet="Alumno_Materia">
+          <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="idAlumnoMateria" ColumnName="idAlumnoMateria" />
           <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
@@ -33,6 +34,7 @@
     <EntitySetMapping Name="Calificacions">
       <EntityTypeMapping TypeName="EscuelaDBModel.Calificacion">
         <MappingFragment StoreEntitySet="Calificacion">
+          <ScalarProperty Name="promedioFinal" ColumnName="promedioFinal" />
           <ScalarProperty Name="idCalificacion" ColumnName="idCalificacion" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
@@ -60,6 +62,7 @@
         <MappingFragment StoreEntitySet="Materia">
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,6 +87,7 @@
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -113,6 +117,7 @@
           <ScalarProperty Name="año" ColumnName="año" />
           <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -142,6 +147,7 @@
           <ScalarProperty Name="usuario1" ColumnName="usuario" />
           <ScalarProperty Name="pass" ColumnName="pass" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

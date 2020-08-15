@@ -126,6 +126,7 @@ namespace SistemaColegioEF.Formularios
             oPersona.direccion = tbDireccionProf.Text;
             oPersona.telefono = tbTelefonoProf.Text;
             oPersona.email = tbEmailProf.Text;
+            oPersona.activo = 1;
 
             db.Personas.Add(oPersona);
             db.SaveChanges();
@@ -173,10 +174,14 @@ namespace SistemaColegioEF.Formularios
                 {
                     try
                     {
-                        Profesor oProfesor = (from a in db.Profesors
-                                          where a.idPersona == id
-                                          select a).FirstOrDefault();
-                        db.Profesors.Remove(oProfesor);
+                        //Profesor oProfesor = (from a in db.Profesors
+                        //                  where a.idPersona == id
+                        //                  select a).FirstOrDefault();
+                        //db.Profesors.Remove(oProfesor);
+                        var persona = (from a in db.Personas
+                                       where a.idPersona == id
+                                       select a).FirstOrDefault();
+                        persona.activo = 0; //Persona inactiva (Baja lógica)
                         db.SaveChanges();
                         MessageBox.Show("Se eliminó el registo con éxito!");
                     }
@@ -208,7 +213,6 @@ namespace SistemaColegioEF.Formularios
             tbEmailProf.Clear();
             tbEspecialidadProf.Clear();
             tbNivelProf.Clear();
-            tbNombreProf.Focus();
             dgvProfesores.ClearSelection();
         }
 
@@ -240,6 +244,7 @@ namespace SistemaColegioEF.Formularios
         {
             var result = from p in db.Personas
                          join pr in db.Profesors on p.idPersona equals pr.idPersona
+                         where p.activo == 1
                          select new { p.idPersona, p.nombre, p.apellido, p.dni, p.sexo, p.fechaNac, p.direccion, p.telefono, p.email, pr.nivel, pr.especialidad };
 
             dgvProfesores.DataSource = result.ToList();
@@ -282,6 +287,7 @@ namespace SistemaColegioEF.Formularios
             tbEmailProf.Enabled = true;
             tbNivelProf.Enabled = true;
             tbEspecialidadProf.Enabled = true;
+            tbNombreProf.Focus();
         }
 
         public void deshabilitCampos(object sender, EventArgs e)

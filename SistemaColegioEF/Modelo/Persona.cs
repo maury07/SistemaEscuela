@@ -30,6 +30,7 @@ namespace SistemaColegioEF.Modelo
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
+        public Nullable<int> activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Alumno> Alumnoes { get; set; }

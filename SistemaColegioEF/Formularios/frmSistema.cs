@@ -24,6 +24,7 @@ namespace SistemaColegioEF.Formularios
         {
             var result = from u in db.Usuarios
                          join r in db.Roles on u.idRol equals r.idRoles
+                         where u.activo == 1
                          select new { u.idUsuario, u.usuario1, u.pass, r.permiso };
 
             dgvUsuariosSys.DataSource = result.ToList();
@@ -169,10 +170,14 @@ namespace SistemaColegioEF.Formularios
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (dgEliminar == DialogResult.Yes)
             {
-                Usuario oUser = (from a in db.Usuarios
+                //Usuario oUser = (from a in db.Usuarios
+                //             where a.idUsuario == idUser
+                //             select a).FirstOrDefault();
+                //db.Usuarios.Remove(oUser);
+                var query = (from a in db.Usuarios
                              where a.idUsuario == idUser
                              select a).FirstOrDefault();
-                db.Usuarios.Remove(oUser);
+                query.activo = 0;
                 db.SaveChanges();
             }
             listarUsuarios();
