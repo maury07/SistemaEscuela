@@ -54,10 +54,10 @@
             this.tbAñoLectivoAlu = new System.Windows.Forms.TextBox();
             this.lblAñoLectivo = new System.Windows.Forms.Label();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
+            this.pnlBusqueda = new System.Windows.Forms.Panel();
             this.btnSalirAlu = new System.Windows.Forms.Button();
             this.dgvAlumnos = new System.Windows.Forms.DataGridView();
             this.ucAbm1 = new SistemaColegioEF.Controls.ucAbm();
-            this.pnlBusqueda = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -349,6 +349,13 @@
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Búsqueda";
             // 
+            // pnlBusqueda
+            // 
+            this.pnlBusqueda.Location = new System.Drawing.Point(107, 15);
+            this.pnlBusqueda.Name = "pnlBusqueda";
+            this.pnlBusqueda.Size = new System.Drawing.Size(416, 59);
+            this.pnlBusqueda.TabIndex = 0;
+            // 
             // btnSalirAlu
             // 
             this.btnSalirAlu.Location = new System.Drawing.Point(545, 475);
@@ -377,13 +384,6 @@
             this.ucAbm1.TabIndex = 0;
             this.ucAbm1.Valid = false;
             // 
-            // pnlBusqueda
-            // 
-            this.pnlBusqueda.Location = new System.Drawing.Point(107, 15);
-            this.pnlBusqueda.Name = "pnlBusqueda";
-            this.pnlBusqueda.Size = new System.Drawing.Size(416, 59);
-            this.pnlBusqueda.TabIndex = 0;
-            // 
             // frmEstudiantes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +394,7 @@
             this.MinimizeBox = false;
             this.Name = "frmEstudiantes";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion de Estudiantes";
             this.Load += new System.EventHandler(this.frmEstudiantes_Load);

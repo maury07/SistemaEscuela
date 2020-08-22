@@ -105,6 +105,7 @@
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Funciones\DataEventArgs.cs" />
+    <Compile Include="Funciones\Validaciones.cs" />
     <Compile Include="Modelo\Alumno.cs">
       <DependentUpon>ModeloEscuela.tt</DependentUpon>
     </Compile>

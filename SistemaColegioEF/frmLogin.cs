@@ -39,7 +39,7 @@ namespace SistemaColegioEF
                 {
                     var oUser = result.First();
                     frmHome oFrmHome = new frmHome(oUser.Id, oUser.User, oUser.Pass, oUser.Permiso);
-                    oFrmHome.Show();
+                    oFrmHome.ShowDialog();
                     tbUsuario.Clear();
                     tbContraseña.Clear();
                 }

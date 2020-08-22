@@ -337,6 +337,7 @@
             this.MinimizeBox = false;
             this.Name = "frmSistema";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmSistema_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
