@@ -19,7 +19,7 @@ namespace SistemaColegioEF.Modelo
         public string pass { get; set; }
         public Nullable<int> idRol { get; set; }
         public Nullable<int> activo { get; set; }
-    
+
         public virtual Role Role { get; set; }
     }
 }

@@ -16,8 +16,8 @@
     <Property Name="idAlumnoMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idAlumno" Type="int" />
     <Property Name="idMateria" Type="int" />
-    <Property Name="promedio" Type="decimal" Precision="2" Scale="2" />
     <Property Name="activo" Type="int" />
+    <Property Name="año" Type="int" />
   </EntityType>
   <EntityType Name="AlumnoAsistencia">
     <Key>

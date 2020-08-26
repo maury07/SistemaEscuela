@@ -14,11 +14,11 @@
     <EntitySetMapping Name="Alumno_Materia">
       <EntityTypeMapping TypeName="EscuelaDBModel.Alumno_Materia">
         <MappingFragment StoreEntitySet="Alumno_Materia">
+          <ScalarProperty Name="año" ColumnName="año" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="idAlumnoMateria" ColumnName="idAlumnoMateria" />
           <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
-          <ScalarProperty Name="promedio" ColumnName="promedio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

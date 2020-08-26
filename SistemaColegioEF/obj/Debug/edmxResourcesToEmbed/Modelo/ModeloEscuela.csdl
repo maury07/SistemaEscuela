@@ -20,10 +20,10 @@
     <Property Name="idAlumnoMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idAlumno" Type="Int32" />
     <Property Name="idMateria" Type="Int32" />
-    <Property Name="promedio" Type="Decimal" Precision="2" Scale="2" />
     <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno_Ma__idAlu__6FE99F9F" FromRole="Alumno_Materia" ToRole="Alumno" />
     <NavigationProperty Name="Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Alumno_Materia" ToRole="Materia" />
     <Property Name="activo" Type="Int32" />
+    <Property Name="año" Type="Int32" />
   </EntityType>
   <EntityType Name="AlumnoAsistencia">
     <Key>

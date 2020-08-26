@@ -23,6 +23,7 @@ namespace SistemaColegioEF.Controls
                 OnClickAgregar?.Invoke(sender, args);
                 pnlAceptCancel.Visible = true;
                 deshabilitarGrilla?.Invoke(sender, args);
+                deshabilitarEdit();
             });
 
             btnEliminar.Click += new EventHandler((sender, args) =>

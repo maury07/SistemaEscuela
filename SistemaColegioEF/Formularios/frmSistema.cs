@@ -24,7 +24,7 @@ namespace SistemaColegioEF.Formularios
         {
             var result = from u in db.Usuarios
                          join r in db.Roles on u.idRol equals r.idRoles
-                         //where u.activo == 1     -- ACTUALIZAR LA BD PARA QUE ANDE EL CAMPO ACTIVO
+                         //where u.activo == 1   ACTUALIZAR LA BD PARA QUE ANDE EL CAMPO ACTIVO
                          select new { u.idUsuario, u.usuario1, u.pass, r.permiso };
 
             dgvUsuariosSys.DataSource = result.ToList();
@@ -138,6 +138,7 @@ namespace SistemaColegioEF.Formularios
                     oUser.usuario1 = tbUsuarioSys.Text;
                     oUser.pass = tbContraseñaSys.Text;
                     oUser.idRol = int.Parse(cbPermisosSys.SelectedValue.ToString());
+                    oUser.activo = 1;
                     db.Usuarios.Add(oUser);
                     
                     db.SaveChanges();

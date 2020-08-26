@@ -17,8 +17,8 @@ namespace SistemaColegioEF.Modelo
         public int idAlumnoMateria { get; set; }
         public Nullable<int> idAlumno { get; set; }
         public Nullable<int> idMateria { get; set; }
-        public Nullable<decimal> promedio { get; set; }
         public Nullable<int> activo { get; set; }
+        public Nullable<int> año { get; set; }
     
         public virtual Alumno Alumno { get; set; }
         public virtual Materia Materia { get; set; }

@@ -21,8 +21,8 @@
           <Property Name="idAlumnoMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idAlumno" Type="int" />
           <Property Name="idMateria" Type="int" />
-          <Property Name="promedio" Type="decimal" Precision="2" Scale="2" />
           <Property Name="activo" Type="int" />
+		  <Property Name="año" Type="int" />
         </EntityType>
         <EntityType Name="AlumnoAsistencia">
           <Key>
@@ -392,10 +392,10 @@
           <Property Name="idAlumnoMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idAlumno" Type="Int32" />
           <Property Name="idMateria" Type="Int32" />
-          <Property Name="promedio" Type="Decimal" Precision="2" Scale="2" />
           <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno_Ma__idAlu__6FE99F9F" FromRole="Alumno_Materia" ToRole="Alumno" />
           <NavigationProperty Name="Materia" Relationship="Self.FK__Alumno_Ma__idMat__70DDC3D8" FromRole="Alumno_Materia" ToRole="Materia" />
           <Property Name="activo" Type="Int32" />
+		  <Property Name="año" Type="Int32" />
         </EntityType>
         <EntityType Name="AlumnoAsistencia">
           <Key>
@@ -780,11 +780,11 @@
           <EntitySetMapping Name="Alumno_Materia">
             <EntityTypeMapping TypeName="EscuelaDBModel.Alumno_Materia">
               <MappingFragment StoreEntitySet="Alumno_Materia">
+			    <ScalarProperty Name="año" ColumnName="año" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="idAlumnoMateria" ColumnName="idAlumnoMateria" />
                 <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
                 <ScalarProperty Name="idMateria" ColumnName="idMateria" />
-                <ScalarProperty Name="promedio" ColumnName="promedio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

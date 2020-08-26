@@ -34,8 +34,7 @@ namespace SistemaColegioEF.Formularios
         private void frmMaterias_Load(object sender, EventArgs e)
         {
             cargarMaterias();
-            cargarRelProfMateria();
-            setearGrillaProfes();
+            
             tbNombreMateria.Clear();
             this.dgvMaterias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMaterias.Columns[0].Width = 1;
@@ -116,6 +115,7 @@ namespace SistemaColegioEF.Formularios
 
         public void editar()
         {
+
             var materia = (from a in db.Materias
                        where a.idMateria == id
                        select a).FirstOrDefault();
@@ -362,49 +362,112 @@ namespace SistemaColegioEF.Formularios
             cargarRelProfMateria();
         }
 
-
-        public int cambiaComboMateriasProf(int idMateria)
-        {
-            int materiaId = 0;
-
-            var result1 = from materias in db.Materias
-                          select materias;
-
-            List<Materia> listaMaterias = new List<Materia>();
-            listaMaterias = result1.ToList();
-
-            foreach (var i in listaMaterias)
-            {
-                if (idMateria == i.idMateria)
-                { materiaId = i.idMateria; }
-            }
-
-            return materiaId;
-        }
-
-        public int cambiaComboBoxProf(int idProfesor)
-        {
-            int profeId = 0;
-
-            var result1 = from profes in db.Profesors
-                          select profes;
-
-            List<Profesor> listaProfes = new List<Profesor>();
-            listaProfes = result1.ToList();
-
-            foreach (var i in listaProfes)
-            {
-                if (idProfesor == i.idProfesor)
-                { profeId = i.idProfesor; }
-            }
-
-            return profeId;
-
-        }
-
         #endregion
 
         #region SECCION TAB ALUMNOS
+
+        private void setearGrillaAlumnos()
+        {
+            dgvAlumnoMateria.Columns[0].HeaderText = "Alumno";
+            dgvAlumnoMateria.Columns[0].Width = 270;
+            dgvAlumnoMateria.Columns[1].HeaderText = "Año";
+            dgvAlumnoMateria.Columns[1].Width = 100;
+        }
+
+        public void cargarRelAlumnoMateria()
+        {
+            var result = (from am in db.Alumno_Materia
+                          join al in db.Alumnoes on am.idAlumno equals al.idAlumno
+                          join p in db.Personas on al.idPersona equals p.idPersona
+                          where am.activo == 1
+                          select new
+                          {
+                              nombreCompletoProf = p.apellido + ", " + p.nombre,
+                              añoMateria = am.año
+                          }).Distinct();
+            dgvAlumnoMateria.DataSource = result.ToList();
+        }
+
+
+        public void cargaComboAlumnos()
+        {
+            var resultProfs = (from p in db.Personas
+                               join al in db.Alumnoes on p.idPersona equals al.idPersona
+                               where p.activo == 1
+                               select new
+                               {
+                                   nombreCompletoProf = p.apellido + ", " + p.nombre,
+                                   idAlumno = al.idAlumno
+                               }).ToList();
+
+            //Asignar la propiedad DataSource
+            cboAlumnos.DataSource = resultProfs;
+
+            //Indicar qué propiedad se verá en la lista
+            cboAlumnos.DisplayMember = "nombreCompletoProf";
+
+            //Indicar qué valor tendrá cada ítem
+            cboAlumnos.ValueMember = "idAlumno";
+        }
+
+        private void btnInscrAlumn_Click(object sender, EventArgs e)
+        {
+            idAlumno = int.Parse(cboAlumnos.SelectedValue.ToString());
+            añoMateriaAlumn = int.Parse(nudAñoAlumnoMateria.Value.ToString());
+            var resultMaterias = from m in db.Materias
+                                 where m.activo == 1
+                                 select m.idMateria;
+            try
+            {
+                if(!validar.existeMaterias()) { return; }
+                if (validar.validarAlumnoAño(añoMateriaAlumn)) { return; }
+
+                Alumno_Materia oAlumnoMateria = new Alumno_Materia();
+                foreach (var materia in resultMaterias)
+                {
+                    oAlumnoMateria.idAlumno = int.Parse(cboAlumnos.SelectedValue.ToString()); ;
+                    oAlumnoMateria.activo = 1;
+                    oAlumnoMateria.idMateria = materia;
+                    oAlumnoMateria.año = añoMateriaAlumn;
+                    db.Alumno_Materia.Add(oAlumnoMateria);
+                    db.SaveChanges();
+                }
+                
+                MessageBox.Show("Inscripción exitosa!");
+            }
+            catch (Exception ex)
+            { throw ex; }
+            cargarRelAlumnoMateria();
+        }
+
+        private void btnDesinscrAlum_Click(object sender, EventArgs e)
+        {
+            idAlumno = int.Parse(cboAlumnos.SelectedValue.ToString());
+            añoMateriaAlumn = int.Parse(nudAñoAlumnoMateria.Value.ToString());
+            var resultMaterias = from m in db.Materias
+                                 where m.activo == 1
+                                 select m.idMateria;
+            try
+            {
+                if (validar.validarAñoInscripcion(añoMateriaAlumn)) { return; }
+                if (validar.validarBajaAlumnoAño(idAlumno, añoMateriaAlumn)) { return; }
+
+                foreach (var materia in resultMaterias)
+                {
+                    db.Alumno_Materia
+                        .Where(am => am.idAlumno == idAlumno &&  am.año == añoMateriaAlumn && am.activo == 1 && am.idMateria == materia)
+                        .ToList()
+                        .ForEach(a => a.activo = 0);
+                    db.SaveChanges();
+                }
+                MessageBox.Show("Se dió de baja la inscripción!");
+                idRelMateriaAl = 0;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            cargarRelAlumnoMateria();
+        }
+
         #endregion
 
         private void tabMaterias_SelectedIndexChanged(object sender, EventArgs e)
@@ -415,6 +478,9 @@ namespace SistemaColegioEF.Formularios
             }
             if (tabMaterias.SelectedTab == tabMaterias.TabPages["tpInscProf"])
             {
+                cargarRelProfMateria();
+                setearGrillaProfes();
+                
                 cargaComboMaterias();
                 cargaComboProfes();
                 
@@ -422,7 +488,10 @@ namespace SistemaColegioEF.Formularios
             }
             if (tabMaterias.SelectedTab == tabMaterias.TabPages["tpInscAlumn"])
             {
-                MessageBox.Show("Tab Alumnos");
+                cargaComboAlumnos();
+                cargarRelAlumnoMateria();
+                if (validar.existeAlumnosInscriptos())
+                { setearGrillaAlumnos(); }
             }
 
         }
