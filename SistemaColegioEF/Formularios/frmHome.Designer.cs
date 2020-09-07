@@ -192,6 +192,7 @@
             this.btnCalificaciones.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCalificaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCalificaciones.UseVisualStyleBackColor = true;
+            this.btnCalificaciones.Click += new System.EventHandler(this.btnCalificaciones_Click);
             // 
             // btnProfesores
             // 

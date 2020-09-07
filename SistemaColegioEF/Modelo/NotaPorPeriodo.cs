@@ -19,11 +19,22 @@ namespace SistemaColegioEF.Modelo
         {
             this.Calificacions = new HashSet<Calificacion>();
         }
+
+        public NotaPorPeriodo(string nombrePeriodo)
+        {
+            this.Calificacions = new HashSet<Calificacion>();
+            this.nombrePeriodo = nombrePeriodo;
+        }
     
         public int idNotaPorPeriodo { get; set; }
-        public Nullable<decimal> nota { get; set; }
+        public Nullable<decimal> nota1 { get; set; }
+        public Nullable<decimal> nota2 { get; set; }
+        public Nullable<decimal> nota3 { get; set; }
+        public Nullable<decimal> previa { get; set; }
+        public Nullable<decimal> promedioMateria { get; set; }
+        public string nombrePeriodo { get; set; }
         public Nullable<int> periodo { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Calificacion> Calificacions { get; set; }
     }

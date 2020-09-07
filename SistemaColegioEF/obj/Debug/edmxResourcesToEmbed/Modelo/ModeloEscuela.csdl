@@ -52,6 +52,7 @@
     <NavigationProperty Name="Materia" Relationship="Self.FK_CalificacionMateria" FromRole="Calificacion" ToRole="Materia" />
     <NavigationProperty Name="Profesor" Relationship="Self.FK_CalificacionProf" FromRole="Calificacion" ToRole="Profesor" />
     <Property Name="promedioFinal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="año" Type="Int32" />
   </EntityType>
   <EntityType Name="Escuela">
     <Key>
@@ -81,7 +82,12 @@
       <PropertyRef Name="idNotaPorPeriodo" />
     </Key>
     <Property Name="idNotaPorPeriodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nota" Type="Decimal" Precision="2" Scale="2" />
+    <Property Name="nota1" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="nota2" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="nota3" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="previa" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="promedioMateria" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="nombrePeriodo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="periodo" Type="Int32" />
     <NavigationProperty Name="Calificacions" Relationship="Self.FK_Calificacion_NotaPeriodo" FromRole="NotaPorPeriodo" ToRole="Calificacion" />
   </EntityType>

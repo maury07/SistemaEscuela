@@ -7,6 +7,7 @@ using SistemaColegioEF.Modelo;
 using System.Data.Entity.Validation;
 using SistemaColegioEF.Controls;
 using System.Windows.Forms;
+using SistemaColegioEF.Funciones;
 
 namespace SistemaColegioEF.Funciones
 {
@@ -48,6 +49,7 @@ namespace SistemaColegioEF.Funciones
 
             return id;
         }
+
         public bool validarBajaAlumnoAño(int alumno, int año)
         {
             bool resp = false;
@@ -78,10 +80,11 @@ namespace SistemaColegioEF.Funciones
             return resp;
         }
 
-        public bool validarAlumnoAño(int año)
+        public bool validarAlumnoAño(int id, int año)
         {
             bool resp = false;
-            var query = db.Alumno_Materia.Where(pm => pm.activo == 1);
+            var query = db.Alumno_Materia.Where(pm => pm.idAlumno == id &&
+                                                      pm.activo == 1);
             if (año == 0)
             {
                 MessageBox.Show("Por favor, ingrese un año", "Error!");
@@ -128,6 +131,194 @@ namespace SistemaColegioEF.Funciones
             }
             else
             { return true; }
+        }
+
+        public bool validarNotaTrimestre(int idProfe, int idMateria, int idAlumno,int trimestre, decimal nota, int año)
+        {
+            bool resp = false;
+            if (trimestre == 1) 
+            {
+                var resultNota = (from c in db.Calificacions
+                                  join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                  join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                  join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                  join m in db.Materias on c.idMateria equals m.idMateria
+                                  where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  select new
+                                  {
+                                      nota1 = np.nota1
+                                  }).ToList();
+
+                if (resultNota.Count > 0)
+                {
+                    MessageBox.Show("Ya se ha cargado la nota del Primer Trimestre");
+                    resp = true;
+                }
+            }
+            else if (trimestre == 2)
+            {
+                var resultNota = (from c in db.Calificacions
+                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                   join m in db.Materias on c.idMateria equals m.idMateria
+                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  select new
+                                   {
+                                       nota2 = np.nota2
+                                   }).ToList();
+                if (resultNota.Count > 0)
+                {
+                    foreach (var x in resultNota)
+                    {
+                        if (x.nota2 != null)
+                        {
+                            MessageBox.Show("Ya se ha cargado la nota del Segundo Trimestre");
+                            resp = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (trimestre == 3)
+            {
+                var resultNota = (from c in db.Calificacions
+                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                   join m in db.Materias on c.idMateria equals m.idMateria
+                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  select new
+                                   {
+                                       nota3 = np.nota3
+                                   }).ToList();
+                if (resultNota.Count>0)
+                {
+                    foreach (var x in resultNota)
+                    {
+                        if (x.nota3 != null)
+                        {
+                            MessageBox.Show("Ya se ha cargado la nota del Tercer Trimestre");
+                            resp = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(trimestre == 4)
+            {
+                var resultNota = (from c in db.Calificacions
+                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                   join m in db.Materias on c.idMateria equals m.idMateria
+                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  select new
+                                   {
+                                       idCalif = c.idCalificacion,
+                                       notaprevia = np.previa
+                                   }).FirstOrDefault();
+                if (resultNota.notaprevia != null) //revisar que no de null y rompa
+                {
+                    sobreescribirNotaPrevia(resultNota.idCalif, idProfe, idMateria, idAlumno, trimestre, nota, año);
+                    resp = false;
+                }
+            }
+            
+            return resp;
+        }
+
+        private void sobreescribirNotaPrevia(int idCalif, int idProfe, int idMateria, int idAlumno, int trimestre, decimal notaPrevia, int año)
+        {
+            DialogResult dgPregunta = MessageBox.Show("Ya existe una nota previa cargada ¿Desea sobreescribir la nota?", "¡Atención!",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dgPregunta == DialogResult.Yes)
+            {
+                try
+                {  //consultar por idCalificacion y asi llegar a la NotaPorPeriodo, porque no se puede filtrar por la idNotaPorPeriodo si todavia no está creada
+                    var califNota = (from c in db.Calificacions
+                                join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                join m in db.Materias on c.idMateria equals m.idMateria
+                                where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.idMateria == idMateria && c.año == año
+                                select new
+                                {
+                                    idNotaPorPeriodo = np.idNotaPorPeriodo
+                                }).FirstOrDefault();
+
+                    var idNota = (from npp in db.NotaPorPeriodoes
+                                  where npp.idNotaPorPeriodo == califNota.idNotaPorPeriodo
+                                  select npp).FirstOrDefault();
+                    idNota.previa = notaPrevia;
+                    db.SaveChanges();
+                    MessageBox.Show("Se sobreescribió la nota!");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        public int calificacionAbierta(int idProfe, int idMateria, int idAlumno, int año)
+        {
+            int idCalif = 0;
+            var resultNota = (from c in db.Calificacions
+                              join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                              join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                              join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                              join m in db.Materias on c.idMateria equals m.idMateria
+                              where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.idMateria == idMateria && c.año == año
+                              select new
+                              {
+                                  idCalif = c.idCalificacion,
+                                  nota = np.nota1
+                              }).ToList();
+            if (resultNota.Count > 0)
+            {
+                foreach (var x in resultNota)
+                    idCalif = x.idCalif;
+            }
+            return idCalif;
+        }
+
+        public int devuelveIdNotaPeriodo(int calificacion)
+        {
+            var notaPeriodo = (from c in db.Calificacions
+                               where c.idCalificacion == calificacion
+                               select c.idNotaPorPeriodo).FirstOrDefault();
+            return notaPeriodo.GetValueOrDefault(); //GetValueOrDefault
+        }
+
+        public decimal calcularPeriodoAnual(int idNotPorPeriodo, decimal nota3)
+        {
+            decimal promedio = 0;
+            decimal? nota1 = null;
+            decimal? nota2 = null;
+            var res = (from n in db.NotaPorPeriodoes
+                       where n.idNotaPorPeriodo == idNotPorPeriodo
+                       select new
+                       {
+                           n.nota1,
+                           n.nota2,
+                           n.nota3
+                       }).FirstOrDefault();
+            nota1 = res?.nota1 ?? 0;
+            nota2 = res?.nota2 ?? 0;
+
+            if ((nota1 == 0) || (nota2 == 0))
+            {
+                MessageBox.Show("Debe completar las notas anteriores para poder ingresar la nota del 3er trimestre");
+                return promedio;
+            }
+            else
+            {
+                promedio = (res.nota1.Value + res.nota2.Value + nota3) / 3;
+            }
+            
+
+            return promedio;
         }
     }
 }

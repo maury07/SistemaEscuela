@@ -45,7 +45,8 @@
           <Property Name="idAlumno" Type="int" Nullable="false" />
           <Property Name="idMateria" Type="int" Nullable="false" />
           <Property Name="idNotaPorPeriodo" Type="int" />
-          <Property Name="promedioFinal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="promedioFinal" Type="decimal" Precision="18" Scale="0" /> <!-- Cambiar tamaño sino rompe / SACARLO -->
+		  <Property Name="año" Type="int" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -72,8 +73,13 @@
             <PropertyRef Name="idNotaPorPeriodo" />
           </Key>
           <Property Name="idNotaPorPeriodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nota" Type="decimal" Precision="2" Scale="2" />
-          <Property Name="periodo" Type="int" />
+          <Property Name="nota1" Type="decimal" Precision="6" Scale="4" />
+		  <Property Name="nota2" Type="decimal" Precision="6" Scale="4" />
+		  <Property Name="nota3" Type="decimal" Precision="6" Scale="4" />
+		  <Property Name="previa" Type="decimal" Precision="6" Scale="4" />
+		  <Property Name="promedioMateria" Type="decimal" Precision="6" Scale="4" />
+		  <Property Name="nombrePeriodo" Type="varchar" MaxLength="30" Nullable="false" />
+		  <Property Name="periodo" Type="int" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -424,6 +430,7 @@
           <NavigationProperty Name="Materia" Relationship="Self.FK_CalificacionMateria" FromRole="Calificacion" ToRole="Materia" />
           <NavigationProperty Name="Profesor" Relationship="Self.FK_CalificacionProf" FromRole="Calificacion" ToRole="Profesor" />
           <Property Name="promedioFinal" Type="Decimal" Precision="18" Scale="0" />
+		  <Property Name="año" Type="Int32" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -453,8 +460,13 @@
             <PropertyRef Name="idNotaPorPeriodo" />
           </Key>
           <Property Name="idNotaPorPeriodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nota" Type="Decimal" Precision="2" Scale="2" />
-          <Property Name="periodo" Type="Int32" />
+          <Property Name="nota1" Type="Decimal" Precision="6" Scale="4" />
+		  <Property Name="nota2" Type="Decimal" Precision="6" Scale="4" />
+		  <Property Name="nota3" Type="Decimal" Precision="6" Scale="4" />
+		  <Property Name="previa" Type="Decimal" Precision="6" Scale="4" />
+		  <Property Name="promedioMateria" Type="Decimal" Precision="6" Scale="4" />
+		  <Property Name="nombrePeriodo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+		  <Property Name="periodo" Type="Int32" />
           <NavigationProperty Name="Calificacions" Relationship="Self.FK_Calificacion_NotaPeriodo" FromRole="NotaPorPeriodo" ToRole="Calificacion" />
         </EntityType>
         <EntityType Name="Persona">
@@ -807,6 +819,7 @@
                 <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
                 <ScalarProperty Name="idMateria" ColumnName="idMateria" />
                 <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
+				<ScalarProperty Name="año" ColumnName="año" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -836,8 +849,13 @@
             <EntityTypeMapping TypeName="EscuelaDBModel.NotaPorPeriodo">
               <MappingFragment StoreEntitySet="NotaPorPeriodo">
                 <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
-                <ScalarProperty Name="nota" ColumnName="nota" />
-                <ScalarProperty Name="periodo" ColumnName="periodo" />
+                <ScalarProperty Name="nota1" ColumnName="nota1" />
+				<ScalarProperty Name="nota2" ColumnName="nota2" />
+				<ScalarProperty Name="nota3" ColumnName="nota3" />
+				<ScalarProperty Name="previa" ColumnName="previa" />
+				<ScalarProperty Name="promedioMateria" ColumnName="promedioMateria" />
+				<ScalarProperty Name="nombrePeriodo" ColumnName="nombrePeriodo" />
+				<ScalarProperty Name="periodo" ColumnName="periodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

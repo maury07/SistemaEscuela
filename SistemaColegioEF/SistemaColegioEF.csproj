@@ -68,6 +68,12 @@
     <Compile Include="Controls\ucBusqueda.Designer.cs">
       <DependentUpon>ucBusqueda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmCalificaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmCalificaciones.Designer.cs">
+      <DependentUpon>frmCalificaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmEstudiantes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     <EmbeddedResource Include="Controls\ucBusqueda.resx">
       <DependentUpon>ucBusqueda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmCalificaciones.resx">
+      <DependentUpon>frmCalificaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmEstudiantes.resx">
       <DependentUpon>frmEstudiantes.cs</DependentUpon>
     </EmbeddedResource>
@@ -263,6 +272,8 @@
       <DependentUpon>ModeloEscuela.edmx</DependentUpon>
       <LastGenOutput>ModeloEscuela.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\rosacolor.jpg" />
+    <None Include="Resources\rojocolores.jpg" />
     <None Include="Resources\panel6.jpg" />
     <None Include="Resources\panel5.jpg" />
     <None Include="Resources\panel4.jpg" />

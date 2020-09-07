@@ -269,7 +269,7 @@ namespace SistemaColegioEF.Formularios
                               nombreCompletoProf = p.apellido + ", " + p.nombre,
                               nombreMateria = m.nombre,
                               añoMateria = mp.año
-                          });
+                          }).OrderBy(x => x.añoMateria);
             dgvProfMateria.DataSource = result.ToList();
         }
         public void cargaComboMaterias()
@@ -382,29 +382,31 @@ namespace SistemaColegioEF.Formularios
                           where am.activo == 1
                           select new
                           {
-                              nombreCompletoProf = p.apellido + ", " + p.nombre,
+                              nombreCompletoAlu = p.apellido + ", " + p.nombre,
                               añoMateria = am.año
-                          }).Distinct();
+                          })
+                          .Distinct()
+                          .OrderBy(x => x.añoMateria);
             dgvAlumnoMateria.DataSource = result.ToList();
         }
 
 
         public void cargaComboAlumnos()
         {
-            var resultProfs = (from p in db.Personas
+            var resultAlumnos = (from p in db.Personas
                                join al in db.Alumnoes on p.idPersona equals al.idPersona
                                where p.activo == 1
                                select new
                                {
-                                   nombreCompletoProf = p.apellido + ", " + p.nombre,
+                                   nombreCompletoAlu = p.apellido + ", " + p.nombre,
                                    idAlumno = al.idAlumno
                                }).ToList();
 
             //Asignar la propiedad DataSource
-            cboAlumnos.DataSource = resultProfs;
+            cboAlumnos.DataSource = resultAlumnos;
 
             //Indicar qué propiedad se verá en la lista
-            cboAlumnos.DisplayMember = "nombreCompletoProf";
+            cboAlumnos.DisplayMember = "nombreCompletoAlu";
 
             //Indicar qué valor tendrá cada ítem
             cboAlumnos.ValueMember = "idAlumno";
@@ -420,7 +422,7 @@ namespace SistemaColegioEF.Formularios
             try
             {
                 if(!validar.existeMaterias()) { return; }
-                if (validar.validarAlumnoAño(añoMateriaAlumn)) { return; }
+                if (validar.validarAlumnoAño(idAlumno, añoMateriaAlumn)) { return; }
 
                 Alumno_Materia oAlumnoMateria = new Alumno_Materia();
                 foreach (var materia in resultMaterias)

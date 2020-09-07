@@ -41,6 +41,8 @@
     <Property Name="idMateria" Type="int" Nullable="false" />
     <Property Name="idNotaPorPeriodo" Type="int" />
     <Property Name="promedioFinal" Type="decimal" Precision="18" Scale="0" />
+    <!-- Cambiar tamaño sino rompe / SACARLO -->
+    <Property Name="año" Type="int" />
   </EntityType>
   <EntityType Name="Escuela">
     <Key>
@@ -67,7 +69,12 @@
       <PropertyRef Name="idNotaPorPeriodo" />
     </Key>
     <Property Name="idNotaPorPeriodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nota" Type="decimal" Precision="2" Scale="2" />
+    <Property Name="nota1" Type="decimal" Precision="6" Scale="4" />
+    <Property Name="nota2" Type="decimal" Precision="6" Scale="4" />
+    <Property Name="nota3" Type="decimal" Precision="6" Scale="4" />
+    <Property Name="previa" Type="decimal" Precision="6" Scale="4" />
+    <Property Name="promedioMateria" Type="decimal" Precision="6" Scale="4" />
+    <Property Name="nombrePeriodo" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="periodo" Type="int" />
   </EntityType>
   <EntityType Name="Persona">

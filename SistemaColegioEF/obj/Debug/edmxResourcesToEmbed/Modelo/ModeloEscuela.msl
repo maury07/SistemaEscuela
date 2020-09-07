@@ -41,6 +41,7 @@
           <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
           <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
+          <ScalarProperty Name="año" ColumnName="año" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -70,7 +71,12 @@
       <EntityTypeMapping TypeName="EscuelaDBModel.NotaPorPeriodo">
         <MappingFragment StoreEntitySet="NotaPorPeriodo">
           <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
-          <ScalarProperty Name="nota" ColumnName="nota" />
+          <ScalarProperty Name="nota1" ColumnName="nota1" />
+          <ScalarProperty Name="nota2" ColumnName="nota2" />
+          <ScalarProperty Name="nota3" ColumnName="nota3" />
+          <ScalarProperty Name="previa" ColumnName="previa" />
+          <ScalarProperty Name="promedioMateria" ColumnName="promedioMateria" />
+          <ScalarProperty Name="nombrePeriodo" ColumnName="nombrePeriodo" />
           <ScalarProperty Name="periodo" ColumnName="periodo" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -97,5 +97,11 @@ namespace SistemaColegioEF.Formularios
             frmMaterias ofrmMaterias = new frmMaterias();
             ofrmMaterias.ShowDialog();
         }
+
+        private void btnCalificaciones_Click(object sender, EventArgs e)
+        {
+            frmCalificaciones ofrmCalificaciones = new frmCalificaciones();
+            ofrmCalificaciones.ShowDialog();
+        }
     }
 }
