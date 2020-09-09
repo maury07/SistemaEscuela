@@ -30,6 +30,7 @@
         {
             this.tabNotas = new System.Windows.Forms.TabControl();
             this.tpGestionNotas = new System.Windows.Forms.TabPage();
+            this.btnCerrarNota = new System.Windows.Forms.Button();
             this.btnAgregarNota = new System.Windows.Forms.Button();
             this.dtpFechaCalificacion = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,7 +60,7 @@
             this.tbDniBusqNotas = new System.Windows.Forms.TextBox();
             this.rbBusqxAñoMat = new System.Windows.Forms.RadioButton();
             this.rbBusqCalifxDni = new System.Windows.Forms.RadioButton();
-            this.btnCerrarNota = new System.Windows.Forms.Button();
+            this.btnModificarNota = new System.Windows.Forms.Button();
             this.tabNotas.SuspendLayout();
             this.tpGestionNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalificaciones)).BeginInit();
@@ -82,6 +83,7 @@
             // tpGestionNotas
             // 
             this.tpGestionNotas.BackgroundImage = global::SistemaColegioEF.Properties.Resources.rosacolor;
+            this.tpGestionNotas.Controls.Add(this.btnModificarNota);
             this.tpGestionNotas.Controls.Add(this.btnCerrarNota);
             this.tpGestionNotas.Controls.Add(this.btnAgregarNota);
             this.tpGestionNotas.Controls.Add(this.dtpFechaCalificacion);
@@ -107,11 +109,23 @@
             this.tpGestionNotas.Text = "Gestion de Notas";
             this.tpGestionNotas.UseVisualStyleBackColor = true;
             // 
+            // btnCerrarNota
+            // 
+            this.btnCerrarNota.BackColor = System.Drawing.Color.LightGreen;
+            this.btnCerrarNota.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarNota.Location = new System.Drawing.Point(109, 419);
+            this.btnCerrarNota.Name = "btnCerrarNota";
+            this.btnCerrarNota.Size = new System.Drawing.Size(117, 23);
+            this.btnCerrarNota.TabIndex = 32;
+            this.btnCerrarNota.Text = "Cerrar Nota";
+            this.btnCerrarNota.UseVisualStyleBackColor = false;
+            this.btnCerrarNota.Click += new System.EventHandler(this.btnCerrarNota_Click);
+            // 
             // btnAgregarNota
             // 
             this.btnAgregarNota.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnAgregarNota.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarNota.Location = new System.Drawing.Point(109, 333);
+            this.btnAgregarNota.Location = new System.Drawing.Point(109, 285);
             this.btnAgregarNota.Name = "btnAgregarNota";
             this.btnAgregarNota.Size = new System.Drawing.Size(117, 33);
             this.btnAgregarNota.TabIndex = 31;
@@ -279,7 +293,7 @@
             this.tpBusqNotas.Location = new System.Drawing.Point(4, 22);
             this.tpBusqNotas.Name = "tpBusqNotas";
             this.tpBusqNotas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBusqNotas.Size = new System.Drawing.Size(1122, 452);
+            this.tpBusqNotas.Size = new System.Drawing.Size(1122, 450);
             this.tpBusqNotas.TabIndex = 1;
             this.tpBusqNotas.Text = "Busqueda";
             this.tpBusqNotas.UseVisualStyleBackColor = true;
@@ -420,17 +434,17 @@
             this.rbBusqCalifxDni.UseVisualStyleBackColor = true;
             this.rbBusqCalifxDni.CheckedChanged += new System.EventHandler(this.rbBusqCalifxDni_CheckedChanged);
             // 
-            // btnCerrarNota
+            // btnModificarNota
             // 
-            this.btnCerrarNota.BackColor = System.Drawing.Color.LightGreen;
-            this.btnCerrarNota.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarNota.Location = new System.Drawing.Point(89, 419);
-            this.btnCerrarNota.Name = "btnCerrarNota";
-            this.btnCerrarNota.Size = new System.Drawing.Size(160, 23);
-            this.btnCerrarNota.TabIndex = 32;
-            this.btnCerrarNota.Text = "Cerrar Nota";
-            this.btnCerrarNota.UseVisualStyleBackColor = false;
-            this.btnCerrarNota.Click += new System.EventHandler(this.btnCerrarNota_Click);
+            this.btnModificarNota.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.btnModificarNota.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarNota.Location = new System.Drawing.Point(109, 324);
+            this.btnModificarNota.Name = "btnModificarNota";
+            this.btnModificarNota.Size = new System.Drawing.Size(117, 33);
+            this.btnModificarNota.TabIndex = 33;
+            this.btnModificarNota.Text = "Modificar";
+            this.btnModificarNota.UseVisualStyleBackColor = false;
+            this.btnModificarNota.Click += new System.EventHandler(this.btnModificarNota_Click);
             // 
             // frmCalificaciones
             // 
@@ -493,5 +507,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaCalifBusq;
         private System.Windows.Forms.Label lblAñoLectivoBusq;
         private System.Windows.Forms.Button btnCerrarNota;
+        private System.Windows.Forms.Button btnModificarNota;
     }
 }

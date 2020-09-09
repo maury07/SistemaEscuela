@@ -321,6 +321,7 @@ namespace SistemaColegioEF.Formularios
                     oCalificacion.idMateria = idMat;
                     oCalificacion.fecha = dtpFechaCalificacion.Value.Date;
                     oCalificacion.idNotaPorPeriodo = oNotaPorPeriodo.idNotaPorPeriodo;
+                    oCalificacion.notaCerrada = 0; //       Nota abierta = 0 / Nota cerrada = 1
                     db.Calificacions.Add(oCalificacion);
                     db.SaveChanges();
                     MessageBox.Show("La calificación se creo exitosamente!");
@@ -343,7 +344,7 @@ namespace SistemaColegioEF.Formularios
                             var query3 = (from np in db.NotaPorPeriodoes
                                           where np.idNotaPorPeriodo == idNot
                                           select np).FirstOrDefault();
-                            decimal promedio = validar.calcularPeriodoAnual(idNot, valor);
+                            decimal promedio = validar.calcularPromedioAnual(idNot, valor);
                             if (promedio == 0)
                                 return;
                             else
@@ -358,7 +359,7 @@ namespace SistemaColegioEF.Formularios
                             var query4 = (from np in db.NotaPorPeriodoes
                                           where np.idNotaPorPeriodo == idNot
                                           select np).FirstOrDefault();
-                            query4.nota2 = valor;
+                            query4.previa = valor;
                             query4.periodo = trimestre;
                             break;
                     }
@@ -377,6 +378,158 @@ namespace SistemaColegioEF.Formularios
                     }
                 }
             }
+        }
+
+        private void btnCerrarNota_Click(object sender, EventArgs e)
+        {
+            decimal? promAnual = null;
+            decimal promedioTope = 7;
+            decimal? notaprevia = null;
+
+            try
+            {
+                if (validarCombos()) { return; }
+                int idProf = int.Parse(cboProfesores.SelectedValue.ToString());
+                int año = int.Parse(cboAños.SelectedValue.ToString());
+                int idAlumn = int.Parse(cboAlumnos.SelectedValue.ToString());
+                int idMat = int.Parse(cboMaterias.SelectedValue.ToString());
+                int idCal = validar.calificacionAbierta(idProf, idMat, idAlumn, año);
+                int idNot = validar.devuelveIdNotaPeriodo(idCal);
+
+                if (validar.notasCargadas(idNot)) { return; }
+                else //se han cargado todas las notas, puede calcular el promedio anual
+                {
+                    var res = (from np in db.NotaPorPeriodoes
+                               where np.idNotaPorPeriodo == idNot
+                               select np).FirstOrDefault();
+                    promAnual = res?.promedioMateria ?? 0;
+                    notaprevia = res?.previa ?? 0;
+
+                    var query = (from c in db.Calificacions
+                                 where c.idCalificacion == idCal
+                                 select c).FirstOrDefault();
+
+                    if (promAnual < promedioTope)// su promedio no llega al 7, debe rendir previa
+                    {
+                        if (notaprevia == 0)
+                        {
+                            MessageBox.Show("Su promedio no llega a 7. Ingrese nota previa", "Error!");
+                            return;
+                        }
+                        else
+                        {
+                            query.promedioFinal = notaprevia;
+                        }
+                    }
+                    else //aprobó, poner el promedio anual como Promedio Definitivo
+                    {
+
+                        query.promedioFinal = promAnual;
+                    }
+                    query.notaCerrada = 1;
+                    db.SaveChanges();
+                    MessageBox.Show("La nota ha sido cerrada con éxito");
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
+        }
+
+        private void btnModificarNota_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (validarCombos()) { return; }
+                int trimestre = int.Parse(cboTrimestres.SelectedValue.ToString());
+                int idProf = int.Parse(cboProfesores.SelectedValue.ToString());
+                int año = int.Parse(cboAños.SelectedValue.ToString());
+                int idAlumn = int.Parse(cboAlumnos.SelectedValue.ToString());
+                int idMat = int.Parse(cboMaterias.SelectedValue.ToString());
+                int idCal = validar.calificacionAbierta(idProf, idMat, idAlumn, año);
+                int idNot = validar.devuelveIdNotaPeriodo(idCal);
+                decimal? notaNueva = null;
+                decimal? promedio = null;
+
+                var query = (from np in db.NotaPorPeriodoes
+                             where np.idNotaPorPeriodo == idNot
+                             select np).FirstOrDefault();
+
+                switch (trimestre)
+                {
+                    case 1:
+                        notaNueva = query?.nota1 ?? 0;
+                        if (notaNueva != 0)
+                        {
+                            query.nota1 = decimal.Parse(tbNota.Text);
+                            db.SaveChanges();
+                            MessageBox.Show("La nota ha sido modificada");
+                        }
+                        else
+                            MessageBox.Show("No ha sido cargada la nota", "Error!");
+                        break;
+                    case 2:
+                        notaNueva = query?.nota2 ?? 0;
+                        if (notaNueva != 0)
+                        {
+                            query.nota2 = decimal.Parse(tbNota.Text);
+                            db.SaveChanges();
+                            MessageBox.Show("La nota ha sido modificada");
+                        }
+                        else
+                            MessageBox.Show("No ha sido cargada la nota", "Error!");
+                        break;
+                    case 3:
+                        notaNueva = query?.nota3 ?? 0;
+                        if (notaNueva != 0)
+                        {
+                            query.nota3 = decimal.Parse(tbNota.Text);
+                            db.SaveChanges();
+                            MessageBox.Show("La nota ha sido modificada");
+                        }
+                        else
+                            MessageBox.Show("No ha sido cargada la nota", "Error!");
+                        break;
+                    case 4:
+                        notaNueva = query?.previa ?? 0;
+                        if (notaNueva != 0)
+                        {
+                            query.previa = decimal.Parse(tbNota.Text);
+                            db.SaveChanges();
+                            MessageBox.Show("La nota ha sido modificada");
+                        }
+                        else
+                            MessageBox.Show("No ha sido cargada la nota", "Error!");
+                        break;
+                }
+
+                promedio = query?.promedioMateria ?? 0;
+                if (promedio != 0)
+                {
+                    promedio = (query.nota1 + query.nota2 + query.nota3) / 3;
+                    query.promedioMateria = promedio;
+                    db.SaveChanges();
+                }
+                cargarCalificaciones();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
+
         }
 
         #endregion
@@ -567,11 +720,9 @@ namespace SistemaColegioEF.Formularios
             }
         }
 
+
         #endregion
 
-        private void btnCerrarNota_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

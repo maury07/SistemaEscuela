@@ -22,6 +22,7 @@ namespace SistemaColegioEF.Modelo
         public Nullable<int> idNotaPorPeriodo { get; set; }
         public Nullable<decimal> promedioFinal { get; set; }
         public Nullable<int> año { get; set; }
+        public Nullable<int> notaCerrada { get; set; }
 
         public virtual Alumno Alumno { get; set; }
         public virtual NotaPorPeriodo NotaPorPeriodo { get; set; }

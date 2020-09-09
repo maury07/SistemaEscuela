@@ -42,6 +42,7 @@
           <ScalarProperty Name="idMateria" ColumnName="idMateria" />
           <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
           <ScalarProperty Name="año" ColumnName="año" />
+          <ScalarProperty Name="notaCerrada" ColumnName="notaCerrada" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -45,8 +45,9 @@
           <Property Name="idAlumno" Type="int" Nullable="false" />
           <Property Name="idMateria" Type="int" Nullable="false" />
           <Property Name="idNotaPorPeriodo" Type="int" />
-          <Property Name="promedioFinal" Type="decimal" Precision="18" Scale="0" /> <!-- Cambiar tamaño sino rompe / SACARLO -->
+          <Property Name="promedioFinal" Type="decimal" Precision="18" Scale="0" /> <!-- Cambiar tamaño sino rompe -->
 		  <Property Name="año" Type="int" />
+		  <Property Name="notaCerrada" Type="int" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -431,6 +432,7 @@
           <NavigationProperty Name="Profesor" Relationship="Self.FK_CalificacionProf" FromRole="Calificacion" ToRole="Profesor" />
           <Property Name="promedioFinal" Type="Decimal" Precision="18" Scale="0" />
 		  <Property Name="año" Type="Int32" />
+		  <Property Name="notaCerrada" Type="Int32" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -820,6 +822,7 @@
                 <ScalarProperty Name="idMateria" ColumnName="idMateria" />
                 <ScalarProperty Name="idNotaPorPeriodo" ColumnName="idNotaPorPeriodo" />
 				<ScalarProperty Name="año" ColumnName="año" />
+				<ScalarProperty Name="notaCerrada" ColumnName="notaCerrada" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

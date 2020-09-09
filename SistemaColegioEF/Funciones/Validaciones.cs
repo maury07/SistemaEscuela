@@ -15,6 +15,7 @@ namespace SistemaColegioEF.Funciones
     {
         EscuelaDB db = new EscuelaDB();
 
+        #region VALIDACION DE MATERIAS
         public bool validarProfMateria(int materia, int año)
         {
             bool resp = true;
@@ -22,11 +23,11 @@ namespace SistemaColegioEF.Funciones
                                                         pm.año == año &&
                                                         pm.activo == 1);
             if (query.Count() > 0)
-            { 
+            {
                 MessageBox.Show("Existe un profesor dictando la materia en este año!", "Error!");
                 resp = false;
             }
- 
+
             return resp;
         }
 
@@ -70,7 +71,7 @@ namespace SistemaColegioEF.Funciones
         public bool validarAñoInscripcion(int año)
         {
             bool resp = false;
-            var query = db.Alumno_Materia.Where(pm =>  pm.año == año &&
+            var query = db.Alumno_Materia.Where(pm => pm.año == año &&
                                                        pm.activo == 1);
             if (año == 0)
             {
@@ -95,7 +96,7 @@ namespace SistemaColegioEF.Funciones
                 MessageBox.Show("El alumno ya está cursando un año", "Error!");
                 return true;
             }
-            
+
             return resp;
         }
 
@@ -133,10 +134,14 @@ namespace SistemaColegioEF.Funciones
             { return true; }
         }
 
-        public bool validarNotaTrimestre(int idProfe, int idMateria, int idAlumno,int trimestre, decimal nota, int año)
+        #endregion
+
+        #region VALIDACIONES DE CALIFICACIONES
+
+        public bool validarNotaTrimestre(int idProfe, int idMateria, int idAlumno, int trimestre, decimal nota, int año)
         {
             bool resp = false;
-            if (trimestre == 1) 
+            if (trimestre == 1)
             {
                 var resultNota = (from c in db.Calificacions
                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
@@ -149,25 +154,32 @@ namespace SistemaColegioEF.Funciones
                                       nota1 = np.nota1
                                   }).ToList();
 
-                if (resultNota.Count > 0)
+                if (resultNota.Any())
                 {
-                    MessageBox.Show("Ya se ha cargado la nota del Primer Trimestre");
-                    resp = true;
+                    foreach (var x in resultNota)
+                    {
+                        if (x.nota1 != null)
+                        {
+                            MessageBox.Show("Ya se ha cargado la nota del Primer Trimestre");
+                            resp = true;
+                            break;
+                        }
+                    }
                 }
             }
             else if (trimestre == 2)
             {
                 var resultNota = (from c in db.Calificacions
-                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
-                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
-                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
-                                   join m in db.Materias on c.idMateria equals m.idMateria
-                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                  join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                  join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                  join m in db.Materias on c.idMateria equals m.idMateria
+                                  where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
                                   select new
-                                   {
-                                       nota2 = np.nota2
-                                   }).ToList();
-                if (resultNota.Count > 0)
+                                  {
+                                      nota2 = np.nota2
+                                  }).ToList();
+                if (resultNota.Any())
                 {
                     foreach (var x in resultNota)
                     {
@@ -183,16 +195,16 @@ namespace SistemaColegioEF.Funciones
             else if (trimestre == 3)
             {
                 var resultNota = (from c in db.Calificacions
-                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
-                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
-                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
-                                   join m in db.Materias on c.idMateria equals m.idMateria
-                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                  join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                  join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                  join m in db.Materias on c.idMateria equals m.idMateria
+                                  where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
                                   select new
-                                   {
-                                       nota3 = np.nota3
-                                   }).ToList();
-                if (resultNota.Count>0)
+                                  {
+                                      nota3 = np.nota3
+                                  }).ToList();
+                if (resultNota.Any())
                 {
                     foreach (var x in resultNota)
                     {
@@ -205,26 +217,32 @@ namespace SistemaColegioEF.Funciones
                     }
                 }
             }
-            else if(trimestre == 4)
+            else if (trimestre == 4)
             {
                 var resultNota = (from c in db.Calificacions
-                                   join pr in db.Profesors on c.idProfesor equals pr.idProfesor
-                                   join al in db.Alumnoes on c.idAlumno equals al.idAlumno
-                                   join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
-                                   join m in db.Materias on c.idMateria equals m.idMateria
-                                   where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
+                                  join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                  join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                  join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                  join m in db.Materias on c.idMateria equals m.idMateria
+                                  where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.año == año
                                   select new
-                                   {
-                                       idCalif = c.idCalificacion,
-                                       notaprevia = np.previa
-                                   }).FirstOrDefault();
-                if (resultNota.notaprevia != null) //revisar que no de null y rompa
+                                  {
+                                      idCalif = c.idCalificacion,
+                                      notaprevia = np.previa
+                                  }).ToList();
+                if (resultNota.Any())
                 {
-                    sobreescribirNotaPrevia(resultNota.idCalif, idProfe, idMateria, idAlumno, trimestre, nota, año);
-                    resp = false;
+                    foreach (var x in resultNota)
+                    {
+                        if (x.notaprevia != null)
+                        {
+                            sobreescribirNotaPrevia(x.idCalif, idProfe, idMateria, idAlumno, trimestre, nota, año);
+                            resp = false;
+                        }
+                    }
                 }
             }
-            
+
             return resp;
         }
 
@@ -237,15 +255,15 @@ namespace SistemaColegioEF.Funciones
                 try
                 {  //consultar por idCalificacion y asi llegar a la NotaPorPeriodo, porque no se puede filtrar por la idNotaPorPeriodo si todavia no está creada
                     var califNota = (from c in db.Calificacions
-                                join pr in db.Profesors on c.idProfesor equals pr.idProfesor
-                                join al in db.Alumnoes on c.idAlumno equals al.idAlumno
-                                join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
-                                join m in db.Materias on c.idMateria equals m.idMateria
-                                where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.idMateria == idMateria && c.año == año
-                                select new
-                                {
-                                    idNotaPorPeriodo = np.idNotaPorPeriodo
-                                }).FirstOrDefault();
+                                     join pr in db.Profesors on c.idProfesor equals pr.idProfesor
+                                     join al in db.Alumnoes on c.idAlumno equals al.idAlumno
+                                     join np in db.NotaPorPeriodoes on c.idNotaPorPeriodo equals np.idNotaPorPeriodo
+                                     join m in db.Materias on c.idMateria equals m.idMateria
+                                     where c.idProfesor == idProfe && c.idMateria == idMateria && c.idAlumno == idAlumno && c.idMateria == idMateria && c.año == año
+                                     select new
+                                     {
+                                         idNotaPorPeriodo = np.idNotaPorPeriodo
+                                     }).FirstOrDefault();
 
                     var idNota = (from npp in db.NotaPorPeriodoes
                                   where npp.idNotaPorPeriodo == califNota.idNotaPorPeriodo
@@ -291,7 +309,7 @@ namespace SistemaColegioEF.Funciones
             return notaPeriodo.GetValueOrDefault(); //GetValueOrDefault
         }
 
-        public decimal calcularPeriodoAnual(int idNotPorPeriodo, decimal nota3)
+        public decimal calcularPromedioAnual(int idNotPorPeriodo, decimal nota3)
         {
             decimal promedio = 0;
             decimal? nota1 = null;
@@ -316,9 +334,37 @@ namespace SistemaColegioEF.Funciones
             {
                 promedio = (res.nota1.Value + res.nota2.Value + nota3) / 3;
             }
-            
+
 
             return promedio;
         }
+
+        public bool notasCargadas(int idNotaPorPeriodo)
+        {
+            bool resp = false;
+            decimal? nota1 = null;
+            decimal? nota2 = null;
+            decimal? nota3 = null;
+            var res = (from n in db.NotaPorPeriodoes
+                       where n.idNotaPorPeriodo == idNotaPorPeriodo
+                       select new
+                       {
+                           n.nota1,
+                           n.nota2,
+                           n.nota3
+                       }).FirstOrDefault();
+            nota1 = res?.nota1 ?? 0;
+            nota2 = res?.nota2 ?? 0;
+            nota3 = res?.nota3 ?? 0;
+
+            if ((nota1 == 0) || (nota2 == 0) || (nota3 == 0))
+            {
+                MessageBox.Show("No se han cargado todas las notas");
+                resp = true;
+            }
+            return resp;
+        }
+
+        #endregion
     }
 }
