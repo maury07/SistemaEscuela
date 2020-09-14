@@ -26,6 +26,7 @@
     <Property Name="idAlumnoAsistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fecha" Type="date" />
     <Property Name="idAlumno" Type="int" />
+    <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="Calificacion">
     <Key>
@@ -100,6 +101,7 @@
     <Property Name="idProfAsistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fecha" Type="date" />
     <Property Name="idProfesor" Type="int" />
+    <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="Profesor">
     <Key>

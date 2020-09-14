@@ -57,12 +57,15 @@ namespace SistemaColegioEF.Formularios
             dgvCalificaciones.Columns[6].HeaderText = "3er Trim";
             dgvCalificaciones.Columns[6].Width = 70;
             dgvCalificaciones.Columns[6].DefaultCellStyle.Format = "n2";
-            dgvCalificaciones.Columns[7].HeaderText = "Dic/Marzo";
-            dgvCalificaciones.Columns[7].Width = 70;
-            dgvCalificaciones.Columns[7].DefaultCellStyle.Format = "n2";
-            dgvCalificaciones.Columns[8].HeaderText = "Promedio Materia";
-            dgvCalificaciones.Columns[8].Width = 90;
-            dgvCalificaciones.Columns[8].DefaultCellStyle.Format = "n3";
+            dgvCalificaciones.Columns[7].HeaderText = "Prom. Materia";
+            dgvCalificaciones.Columns[7].Width = 90;
+            dgvCalificaciones.Columns[7].DefaultCellStyle.Format = "n3";
+            dgvCalificaciones.Columns[8].HeaderText = "Dic/Marzo";
+            dgvCalificaciones.Columns[8].Width = 70;
+            dgvCalificaciones.Columns[8].DefaultCellStyle.Format = "n2";
+            dgvCalificaciones.Columns[9].HeaderText = "Prom. Definitivo";
+            dgvCalificaciones.Columns[9].Width = 90;
+            dgvCalificaciones.Columns[9].DefaultCellStyle.Format = "n3";
         }
 
         public void cargarCalificaciones()
@@ -83,8 +86,9 @@ namespace SistemaColegioEF.Formularios
                               nota1 = np.nota1,
                               nota2 = np.nota2,
                               nota3 = np.nota3,
+                              promedio = np.promedioMateria,
                               previa = np.previa,
-                              promedio = np.promedioMateria
+                              promDefinitivo = c.promedioFinal
                           }).OrderBy(x => x.añoCalificacion);
             dgvCalificaciones.DataSource = result.ToList();
         }
@@ -534,24 +538,6 @@ namespace SistemaColegioEF.Formularios
 
         #endregion
 
-        private void tabNotas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabNotas.SelectedTab == tabNotas.TabPages["tpGestionNotas"])
-            {
-                cargarCalificaciones();
-                setearGrillaCalif();
-                cargaCombosPantalla();
-            }
-            if (tabNotas.SelectedTab == tabNotas.TabPages["tpBusqNotas"])
-            {
-                dtpFechaCalifBusq.Format = DateTimePickerFormat.Custom;
-                dtpFechaCalifBusq.CustomFormat = "yyyy";
-                dtpFechaCalifBusq.ShowUpDown = true;
-                cargaComboAñoBusq();
-                cargaComboMateriasBusq();
-            }
-        }
-
         #region TAB BUSQUEDA NOTAS
         private void rbBusqCalifxDni_CheckedChanged(object sender, EventArgs e)
         {
@@ -635,19 +621,28 @@ namespace SistemaColegioEF.Formularios
             dgvCalifBusqueda.Columns[6].HeaderText = "3er Trim";
             dgvCalifBusqueda.Columns[6].Width = 70;
             dgvCalifBusqueda.Columns[6].DefaultCellStyle.Format = "n2";
-            dgvCalifBusqueda.Columns[7].HeaderText = "Dic/Marzo";
-            dgvCalifBusqueda.Columns[7].Width = 70;
-            dgvCalifBusqueda.Columns[7].DefaultCellStyle.Format = "n2";
-            dgvCalifBusqueda.Columns[8].HeaderText = "Promedio Materia";
-            dgvCalifBusqueda.Columns[8].Width = 90;
-            dgvCalifBusqueda.Columns[8].DefaultCellStyle.Format = "n3";
+            dgvCalifBusqueda.Columns[7].HeaderText = "Prom. Materia";
+            dgvCalifBusqueda.Columns[7].Width = 90;
+            dgvCalifBusqueda.Columns[7].DefaultCellStyle.Format = "n3";
+            dgvCalifBusqueda.Columns[8].HeaderText = "Dic/Marzo";
+            dgvCalifBusqueda.Columns[8].Width = 70;
+            dgvCalifBusqueda.Columns[8].DefaultCellStyle.Format = "n2";
+            dgvCalifBusqueda.Columns[9].HeaderText = "Prom. Definitivo";
+            dgvCalifBusqueda.Columns[9].Width = 90;
+            dgvCalifBusqueda.Columns[9].DefaultCellStyle.Format = "n3";
         }
 
         private void btnBusqNotas_Click(object sender, EventArgs e)
         {
             int añoLectivo = dtpFechaCalifBusq.Value.Year;
+            
             if (rbBusqCalifxDni.Checked)
             {
+                if(string.IsNullOrEmpty(tbDniBusqNotas.Text))
+                {
+                    MessageBox.Show("Por favor ingrese un dni");
+                    return; 
+                }
                 var calif = (from c in db.Calificacions
                              join pr in db.Profesors on c.idProfesor equals pr.idProfesor
                              join al in db.Alumnoes on c.idAlumno equals al.idAlumno
@@ -665,8 +660,9 @@ namespace SistemaColegioEF.Formularios
                                  nota1 = np.nota1,
                                  nota2 = np.nota2,
                                  nota3 = np.nota3,
+                                 promedio = np.promedioMateria,
                                  previa = np.previa,
-                                 promedio = np.promedioMateria
+                                 promDefinitivo = c.promedioFinal
                              }).OrderBy(x => x.añoCalificacion)
                              .ToList();
 
@@ -682,6 +678,9 @@ namespace SistemaColegioEF.Formularios
             }
             else
             {
+                if (cboAñoBusqNota.SelectedIndex == -1) { MessageBox.Show("No se ha seleccionado un curso"); return; }
+                if (cboMateriaBusq.SelectedIndex == -1) { MessageBox.Show("No se ha seleccionado una materia");return; }
+                
                 int materiaBusq = int.Parse(cboMateriaBusq.SelectedValue.ToString());
                 int cursoBusq = int.Parse(cboAñoBusqNota.SelectedValue.ToString());
                 var calif = (from c in db.Calificacions
@@ -723,6 +722,22 @@ namespace SistemaColegioEF.Formularios
 
         #endregion
 
-        
+        private void tabNotas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabNotas.SelectedTab == tabNotas.TabPages["tpGestionNotas"])
+            {
+                cargarCalificaciones();
+                setearGrillaCalif();
+                cargaCombosPantalla();
+            }
+            if (tabNotas.SelectedTab == tabNotas.TabPages["tpBusqNotas"])
+            {
+                dtpFechaCalifBusq.Format = DateTimePickerFormat.Custom;
+                dtpFechaCalifBusq.CustomFormat = "yyyy";
+                dtpFechaCalifBusq.ShowUpDown = true;
+                cargaComboAñoBusq();
+                cargaComboMateriasBusq();
+            }
+        }
     }
 }

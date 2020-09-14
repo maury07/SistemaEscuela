@@ -103,5 +103,11 @@ namespace SistemaColegioEF.Formularios
             frmCalificaciones ofrmCalificaciones = new frmCalificaciones();
             ofrmCalificaciones.ShowDialog();
         }
+
+        private void btnAsistencias_Click(object sender, EventArgs e)
+        {
+            frmAsistencias ofrmAsistencias = new frmAsistencias();
+            ofrmAsistencias.ShowDialog();
+        }
     }
 }

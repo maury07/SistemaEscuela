@@ -31,6 +31,7 @@
           <Property Name="idAlumnoAsistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fecha" Type="date" />
           <Property Name="idAlumno" Type="int" />
+		  <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Calificacion">
           <Key>
@@ -104,6 +105,7 @@
           <Property Name="idProfAsistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fecha" Type="date" />
           <Property Name="idProfesor" Type="int" />
+		  <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Profesor">
           <Key>
@@ -412,6 +414,7 @@
           <Property Name="fecha" Type="DateTime" Precision="0" />
           <Property Name="idAlumno" Type="Int32" />
           <NavigationProperty Name="Alumno" Relationship="Self.FK_AlumnoAsis_Alumno" FromRole="AlumnoAsistencia" ToRole="Alumno" />
+		  <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Calificacion">
           <Key>
@@ -496,6 +499,7 @@
           <Property Name="fecha" Type="DateTime" Precision="0" />
           <Property Name="idProfesor" Type="Int32" />
           <NavigationProperty Name="Profesor" Relationship="Self.FK_ProfAsistencia_Prof" FromRole="ProfAsistencia" ToRole="Profesor" />
+		  <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Profesor">
           <Key>
@@ -808,6 +812,7 @@
                 <ScalarProperty Name="idAlumnoAsistencia" ColumnName="idAlumnoAsistencia" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+				<ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -884,6 +889,7 @@
                 <ScalarProperty Name="idProfAsistencia" ColumnName="idProfAsistencia" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+				<ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

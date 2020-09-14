@@ -28,6 +28,7 @@
           <ScalarProperty Name="idAlumnoAsistencia" ColumnName="idAlumnoAsistencia" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -104,6 +105,7 @@
           <ScalarProperty Name="idProfAsistencia" ColumnName="idProfAsistencia" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

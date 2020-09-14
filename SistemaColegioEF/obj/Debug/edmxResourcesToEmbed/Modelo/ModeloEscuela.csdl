@@ -33,6 +33,7 @@
     <Property Name="fecha" Type="DateTime" Precision="0" />
     <Property Name="idAlumno" Type="Int32" />
     <NavigationProperty Name="Alumno" Relationship="Self.FK_AlumnoAsis_Alumno" FromRole="AlumnoAsistencia" ToRole="Alumno" />
+    <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="Calificacion">
     <Key>
@@ -117,6 +118,7 @@
     <Property Name="fecha" Type="DateTime" Precision="0" />
     <Property Name="idProfesor" Type="Int32" />
     <NavigationProperty Name="Profesor" Relationship="Self.FK_ProfAsistencia_Prof" FromRole="ProfAsistencia" ToRole="Profesor" />
+    <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="Profesor">
     <Key>

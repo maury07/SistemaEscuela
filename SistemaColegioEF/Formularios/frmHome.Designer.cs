@@ -165,6 +165,7 @@
             this.btnAsistencias.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAsistencias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAsistencias.UseVisualStyleBackColor = true;
+            this.btnAsistencias.Click += new System.EventHandler(this.btnAsistencias_Click);
             // 
             // btnMaterias
             // 

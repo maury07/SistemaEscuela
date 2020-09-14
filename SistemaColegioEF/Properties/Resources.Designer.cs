@@ -213,6 +213,16 @@ namespace SistemaColegioEF.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fonde_verde_agua {
+            get {
+                object obj = ResourceManager.GetObject("fonde verde agua", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hotel {
             get {
                 object obj = ResourceManager.GetObject("hotel", resourceCulture);
@@ -336,6 +346,16 @@ namespace SistemaColegioEF.Properties {
         internal static System.Drawing.Bitmap panel6 {
             get {
                 object obj = ResourceManager.GetObject("panel6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap panel7 {
+            get {
+                object obj = ResourceManager.GetObject("panel7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

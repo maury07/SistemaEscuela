@@ -17,7 +17,8 @@ namespace SistemaColegioEF.Modelo
         public int idProfAsistencia { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<int> idProfesor { get; set; }
-    
+        public string estado { get; set; }
+
         public virtual Profesor Profesor { get; set; }
     }
 }

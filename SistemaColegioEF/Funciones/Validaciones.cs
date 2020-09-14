@@ -366,5 +366,44 @@ namespace SistemaColegioEF.Funciones
         }
 
         #endregion
+
+        #region ASISTENCIAS DE ALUMNO
+
+        public bool validarExisteAsistAlumno(int idAlumn, DateTime fecha)
+        {
+            int? id = null;
+            bool resp = false;
+            var res = (from asi in db.AlumnoAsistencias
+                       where asi.idAlumno == idAlumn && asi.fecha == fecha
+                       select asi).FirstOrDefault();
+            id = res?.idAlumnoAsistencia ?? 0;
+            if (id != 0)
+            {
+                MessageBox.Show("Ya existe una asistencia cargada para ese alumno en esa fecha");
+                resp = true;
+            }
+            return resp;
+        }
+        #endregion
+
+        #region ASISTENCIAS DE PROFES
+
+        public bool validarExisteAsistProfe(int idProf, DateTime fecha)
+        {
+            int? id = null;
+            bool resp = false;
+            var res = (from pra in db.ProfAsistencias
+                       where pra.idProfesor == idProf && pra.fecha == fecha
+                       select pra).FirstOrDefault();
+            id = res?.idProfAsistencia ?? 0;
+            if (id != 0)
+            {
+                MessageBox.Show("Ya existe una asistencia cargada para ese profesor en esa fecha");
+                resp = true;
+            }
+            return resp;
+        }
+
+        #endregion
     }
 }

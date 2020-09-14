@@ -53,3 +53,4 @@ C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\Sis
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.pdb
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.csprojAssemblyReference.cache
 C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmCalificaciones.resources
+C:\Users\mauricio\Documents\GitHub\SistemaEscuela\SistemaColegioEF\obj\Debug\SistemaColegioEF.Formularios.frmAsistencias.resources
